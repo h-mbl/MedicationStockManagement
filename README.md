@@ -3,8 +3,6 @@ This Java program, named "MedicationStockManagement," allows for the management 
 
 # Usage
 The program can be executed via the command line using the following syntax:
-
-# code
 ``` java MedicationStockManagement filename1.txt filename2.txt ```
 filename1.txt: Input file containing the transactions to be processed.
 filename2.txt: Output file where the results will be written.
