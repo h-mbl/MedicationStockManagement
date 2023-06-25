@@ -1,5 +1,5 @@
 # MedicationStockManagement
-This Java program, named "MedicationStockManagement," allows for the management of medication inventory in a pharmacy. It handles various transactions such as receiving medication deliveries, processing client prescriptions, displaying pharmacy inventory, setting the current date, and generating orders for missing medications.
+This Java program, named "MedicationStockManagement," allows for the management of medication inventory in a pharmacy. It handles various transactions such as receiving medication deliveries, processing client prescriptions, displaying pharmacy inventory, setting the current Date, and generating orders for missing medications.
 
 # Usage
 The program can be executed via the command line using the following syntax:
@@ -14,15 +14,15 @@ Here are the supported transaction types:
 Delivery: Receipt of medication delivery. Example: Delivery MedicationName Quantity ExpirationDate.
 Prescription: Request for a list of medications for a client. Example: Prescription MedicationName Quantity Duration Renewals.
 DisplayStock: Display the pharmacy's inventory.
-SetDate: Set the current date.
-GenerateOrder: Generate an order for missing medications during a date change.
+SetDate: Set the current Date.
+GenerateOrder: Generate an order for missing medications during a Date change.
 Note that the medication name does not contain any white spaces.
 
 Output Format
 The program generates results in the specified format, which are written to the output file filename2.txt.
 
 # Program Structure
-The program utilizes a binary search tree to store medications and efficiently handle search and insertion operations. Each node in the tree contains information about a medication, such as the name, quantity in stock, and expiration date.
+The program utilizes a binary search tree to store medications and efficiently handle search and insertion operations. Each node in the tree contains information about a medication, such as the name, quantity in stock, and expiration Date.
 
 The processing of transactions occurs in the order they appear, by traversing the input stream. Each transaction is immediately processed to display the corresponding results before moving on to the next transaction.
 
