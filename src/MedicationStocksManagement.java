@@ -1,11 +1,22 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 public class MedicationStocksManagement {
-    public static String Date;
-    public static String currentCategory;
-   // public static String[] parties;
+    private static String date = null;
+    private static String currentCategory;
+    private static String nomMedicament;
+    private static int quantite;
+    private static int aaaa;
+    private static int mm;
+    private static int jj;
+    private static int doseTraitement;
+    private static int repetition;
+    //cette liste enregistrera l'ordre des actions à effectuer
+    private static Queue<Object> fileOperation= new LinkedList<>();
+    BinarySearchTree bst = new BinarySearchTree();
+
+    // public static String[] parties;
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("provide input or output file names.");
@@ -14,105 +25,116 @@ public class MedicationStocksManagement {
         String inputFile = "tests/" + args[0];
         String outputFile = "tests/" + args[1];
         try {
+            //lit le fichier en entree
             readFile(inputFile);
+            //nous passons a travers les elements de la file
+            for (Object obj : fileOperation) {
+                if  (obj instanceof Medicament){}
+                else if (obj instanceof Prescription){}
+                else{}
+                fileOperation.remove();
+            }
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     private static void readFile(String inputFile) throws FileNotFoundException {
+
         File file = new File(inputFile);
         Scanner scanner = new Scanner(file);
-        currentCategory = ""; // Tracks the current category being processed
+        //enregistre la categorie du bloc de ligne
+        currentCategory = "";
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            //indexOf[0] verifie si le premier element de l'objet line est le mot cherche
             if (line.indexOf("APPROV") == 0) {
                 currentCategory = "APPROV";
             } else if (line.indexOf("STOCK") == 0) {
-                currentCategory = "STOCK";
-                parseFichierDate(line);
+                // Marquer l'étape comme le stock initial
+                Stock stockState = new Stock(date);
+                fileOperation.add(stockState);
             } else if (line.indexOf("DATE") == 0) {
-                currentCategory = "DATE";
-                parseFichierDate(line);
+                //currentCategory = "DATE";
+                //je place ceci ici car la date est ecrit : DATE: JJ-MM-AAAA
+                date = readDate(line);
             } else if (line.indexOf("PRESCRIPTION") == 0) {
                 currentCategory = "PRESCRIPTION";
-            } else if (line.indexOf(";") == 0){
+                //lorsque la ligne n'est qu'un ;
+                //note : pense a efface cette condition sans bug
+            } else if (line.indexOf(";") == 0) {
                 continue;
-            }else{
+            } else {
                 switch (currentCategory) {
-                    case "APPROV", "STOCK":
+                    case "APPROV":
                         parseFichier(line);
+                        Medicament medicament = new Medicament(nomMedicament, quantite, aaaa, mm, jj);
+                        fileOperation.add(medicament);
                         break;
-                    case "DATE":
-                        break;
+
                     case "PRESCRIPTION":
-                        System.out.println("Prescription " + line);
+                        parseFichier(line);
+                        Prescription prescription= new Prescription(nomMedicament,doseTraitement,repetition);
+                        fileOperation.add(prescription);
                         break;
                     default:
-                        System.out.println("format invalide");
                         break;
                 }
             }
         }
     }
-    public static void parseFichier(String line){
+
+    public static void parseFichier(String line) {
         line = line.replace("-", " ");
+        line = line.replace(";", "");
         line = line.trim().replaceAll("\\s+", " ");
         String[] parties = line.split(" ");
         int compteur = 0;
-        String nomMedicament = "";
-        int quantite = 0;
-        int aaaa = 0;
-        int mm=0;
-        int jj=0;
-        switch (currentCategory)  {
-              case "APPROV", "STOCK":
-                  for (String donnee : parties)
-                     if (compteur == 0) {
-                         nomMedicament = donnee;
-                         compteur++;
-                     } else if (compteur == 1) {
+        switch (currentCategory) {
+            case "APPROV":
+                for (String donnee : parties) {
+                    if (compteur == 0) {
+                        nomMedicament = donnee;
+                        compteur++;
+                    } else if (compteur == 1) {
                         quantite = Integer.parseInt(donnee);
                         compteur++;
-                     }else if (compteur == 2) {
-                         aaaa = Integer.parseInt(donnee);
+                    } else if (compteur == 2) {
+                        aaaa = Integer.parseInt(donnee);
                         compteur++;
-                    }else if (compteur == 3) {
-                         mm = Integer.parseInt(donnee);
-                         compteur++;
-                    }else {
-                        jj =Integer.parseInt(donnee);
-                         compteur = 0;
-            }
-
-        }
-    }
-    public static void parseFichierDate(String line){
-        line = line.replace("-", " ");
-        line = line.trim().replaceAll("\\s+", " ");
-        String[] parties = line.split(" ");
-        if (parties.length >2) {
-            int compteur = 0;
-            int aaaa = 0;
-            int mm = 0;
-            int jj = 0;
-            for (String donnee : parties) {
-                if (compteur == 0) {
-                    compteur++;
-                } else if (compteur == 1) {
-                    aaaa = Integer.parseInt(donnee);
-                    compteur++;
-                } else if (compteur == 2) {
-                    mm = Integer.parseInt(donnee);
-                    compteur++;
-                } else if (compteur == 3){
-                    jj = Integer.parseInt(donnee);
-                    compteur = 0;
-                }else {
-                    continue;
+                    } else if (compteur == 3) {
+                        mm = Integer.parseInt(donnee);
+                        compteur++;
+                    } else if (compteur == 4 ) {
+                        jj = Integer.parseInt(donnee);
+                        compteur = 0;
+                    }
                 }
-            }
+
+            case "PRESCRIPTION":
+                for (String donnee : parties) {
+                    if (compteur == 0) {
+                        nomMedicament = donnee;
+                        compteur++;
+                    } else if (compteur == 1) {
+                        doseTraitement = Integer.parseInt(donnee);
+                        compteur++;
+                    } else if (compteur == 2) {
+                        repetition = Integer.parseInt(donnee);
+                        compteur++;
+                    }
+                }
         }
     }
+        //fonction pour lire la date
+        public static String readDate (String line){
+            line = line.replace("-", " ");
+            line = line.replace("DATE", "");
+            line = line.replace(";", "");
+            line = line.trim().replaceAll("\\s+", " ");
+            // String[] parties = line.split(" ");
+            return line;
+        }
 }
