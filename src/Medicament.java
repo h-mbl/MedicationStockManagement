@@ -1,5 +1,5 @@
 public class Medicament {
-    private String nom;
+    public String nom;
     private int quantite;
     private int aaaa;
     private int mm;
@@ -12,6 +12,7 @@ public class Medicament {
         this.mm = mm;
         this.jj = jj;
     }
+
 
     // Getters et setters (méthodes d'accès) pour les attributs
 

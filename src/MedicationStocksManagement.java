@@ -14,7 +14,7 @@ public class MedicationStocksManagement {
     private static int repetition;
     //cette liste enregistrera l'ordre des actions à effectuer
     private static Queue<Object> fileOperation= new LinkedList<>();
-    BinarySearchTree bst = new BinarySearchTree();
+    static ArbreGen ArbreGen = new ArbreGen();
 
     // public static String[] parties;
     public static void main(String[] args) {
@@ -29,11 +29,28 @@ public class MedicationStocksManagement {
             readFile(inputFile);
             //nous passons a travers les elements de la file
             for (Object obj : fileOperation) {
-                if  (obj instanceof Medicament){}
-                else if (obj instanceof Prescription){}
+                if  (obj instanceof Medicament){
+                    //lit la valeur contenu dans l'objet venant de la file d'attente
+                    Medicament valueObj = (Medicament) obj;
+                    //ajoute l'objet a l'arbre
+                    ArbreGen.insert(valueObj);
+                }
+                else if (obj instanceof Prescription){
+                    Prescription valueObjPrescription = (Prescription) obj;
+                    //equilibre l'arbre
+                    ArbreGen.balanceTree();
+                    Prescription found = ArbreGen.search(valueObjPrescription);
+                    if (found != null) {
+                        System.out.println("L'élément est présent dans l'arbre : " + found);
+                    } else {
+                        System.out.println("L'élément n'est pas présent dans l'arbre.");
+                    }
+
+                }
                 else{}
                 fileOperation.remove();
             }
+            //System.out.println(ABRTree);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
