@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-import java.util.Date;
+
 
 public class MedicationStocksManagement {
     private static String date = null;
@@ -155,6 +155,16 @@ public class MedicationStocksManagement {
         line = line.trim().replaceAll("\\s+", " ");
         // String[] parties = line.split(" ");
         return line;
+    }
+    public static boolean datePasse(Date dateAVerifie, Date dateCourante ){
+        if (dateAVerifie.getYear() < dateCourante.getYear()){
+            return true;
+        } else if (dateAVerifie.getMonth() < dateCourante.getMonth()) {
+            return true;
+        } else if (dateAVerifie.getDay() < dateCourante.getDay()) {
+            return true;
+        }
+        else {return false;}
     }
     public static Date calculerJour(int days, int day, int month, int year){
         int newDay = day + days;
