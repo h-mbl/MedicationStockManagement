@@ -193,7 +193,7 @@ public class MedicationStocksManagement {
     public static Prescription prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet stock, TreeSet commande){
         commande.add(nomMedicament);
 
-        //return new Prescription()
+        //return new Prescription();
     }
     public static Date date(Date date, TreeSet<Medicament> commande, File file){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
