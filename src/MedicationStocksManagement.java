@@ -180,7 +180,7 @@ public class MedicationStocksManagement {
         }
         else {return false;}
     }
-
+//ds
     public static Date date(Date date, TreeSet<Medicament> treeSet, File file){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             if (treeSet.isEmpty()){
