@@ -1,4 +1,5 @@
 import java.io.*;
+//import java.lang.foreign.ValueLayout;
 import java.util.*;
 
 
@@ -14,7 +15,8 @@ public class MedicationStocksManagement {
     private static int repetition;
     //cette liste enregistrera l'ordre des actions à effectuer
     private static Queue<Object> fileOperation= new LinkedList<>();
-    static  = new ArbreGen();
+    private static Map<String, Medicament> treeMap = new TreeMap<>();
+    private static TreeSet<Medicament> treeSet = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
 
 
@@ -31,27 +33,25 @@ public class MedicationStocksManagement {
             //lit le fichier en entree
             readFile(inputFile);
             //nous passons a travers les elements de la file
-            for (Object obj : fileOperation) {
-                if  (obj instanceof Medicament){
-                    //lit la valeur contenu dans l'objet venant de la file d'attente
+            Iterator<Object> iterator = fileOperation.iterator();
+            while (iterator.hasNext()) {
+                Object obj = iterator.next();
+                if (obj instanceof Medicament) {
                     Medicament valueObj = (Medicament) obj;
-                    //ajoute l'objet a l'arbre
-                    ArbreGen.insert(valueObj);
+                    treeSet.add(valueObj);
                 }
                 else if (obj instanceof Prescription){
                     Prescription valueObjPrescription = (Prescription) obj;
-                    //equilibre l'arbre
-                    ArbreGen.balanceTree();
-                    Prescription found = ArbreGen.search(valueObjPrescription);
-                    if (found != null) {
-                        System.out.println("L'élément est présent dans l'arbre : " + found);
-                    } else {
-                        System.out.println("L'élément n'est pas présent dans l'arbre.");
+                    //treeMap.get(valueObjPrescription.getNomMedicament());
+                    for (Medicament element : treeSet) {
+                        treeMap.put("20", element);
                     }
 
+                    System.out.println(treeMap);
+                } else{
+                    String b=null;
                 }
-                else{}
-                fileOperation.remove();
+                iterator.remove();
             }
             //System.out.println(ABRTree);
 
