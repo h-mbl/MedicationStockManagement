@@ -13,7 +13,7 @@ public class MedicationStocksManagement {
     private static int repetition;
     //cette liste enregistrera l'ordre des actions à effectuer
     private static Queue<Object> fileOperation= new LinkedList<>();
-    static ArbreGen ArbreGen = new ArbreGen();
+    static  = new ArbreGen();
     public static  Date dateCourante = new Date(2000,01,01);
 
 
@@ -58,7 +58,7 @@ public class MedicationStocksManagement {
             throw new RuntimeException(e);
         }
     }
-
+    //test commit
     private static void readFile(String inputFile) throws FileNotFoundException {
 
         File file = new File(inputFile);
