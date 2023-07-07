@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.Date;
 
 public class MedicationStocksManagement {
     private static String date = null;
@@ -156,14 +157,29 @@ public class MedicationStocksManagement {
         // String[] parties = line.split(" ");
         return line;
     }
+    public static Date calculerJour(int days, int day, int month, int year){
+        int newDay = day + days;
+        while(newDay > nbrJrMm(month,year)){
+            newDay -= month;
+            if (month == 12){month = 1; year += 1;}
+            else {month +=1;}
+        }
+        return new Date(newDay,month,year);
+    }
     public static int nbrJrMm(int month, int year){
         int[] nbrJr = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        if (month == 2){
+        if (month == 2 && isBissextile(year)){
             return 29;
         }
         else {
             return nbrJr[month-1];
         }
+    }
+    public static boolean isBissextile(int year){
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+            return true;
+        }
+        else {return false;}
     }
 
     public static Date date(Date date, TreeSet<Medicament> treeSet, File file){
