@@ -95,8 +95,8 @@ public class MedicationStocksManagement {
 
                     case "PRESCRIPTION":
                         parseFichier(line);
-                        Prescription prescription= new Prescription(nomMedicament,doseTraitement,repetition);
-                        fileOperation.add(prescription);
+                        //Prescription prescription= new Prescription(nomMedicament,doseTraitement,repetition);
+                        //fileOperation.add(prescription);
                         break;
                     default:
                         break;
@@ -190,18 +190,22 @@ public class MedicationStocksManagement {
         }
         else {return false;}
     }
-//ds
-    public static Date date(Date date, TreeSet<Medicament> treeSet, File file){
+    public static Prescription prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet stock, TreeSet commande){
+        commande.add(nomMedicament);
+
+        //return new Prescription();
+    }
+    public static Date date(Date date, TreeSet<Medicament> commande, File file){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            if (treeSet.isEmpty()){
+            if (commande.isEmpty()){
                 writer.write(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + "OK");
             }
             else {
                 writer.write(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + " COMMANDES :");
-                for (Medicament medicament : treeSet) {
+                for (Medicament medicament : commande) {
                     writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande());
                 }
-                treeSet.clear();
+                commande.clear();
             }
         } catch (IOException e) {
             e.printStackTrace();
