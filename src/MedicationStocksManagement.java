@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 public class MedicationStocksManagement {
@@ -15,6 +14,9 @@ public class MedicationStocksManagement {
     //cette liste enregistrera l'ordre des actions à effectuer
     private static Queue<Object> fileOperation= new LinkedList<>();
     static ArbreGen ArbreGen = new ArbreGen();
+    public static  Date dateCourante = new Date(2000,01,01);
+
+
 
     // public static String[] parties;
     public static void main(String[] args) {
@@ -119,7 +121,7 @@ public class MedicationStocksManagement {
                         quantite = Integer.parseInt(donnee);
                         compteur++;
                     } else if (compteur == 2) {
-                        aaaa = Integer.parseInt(donnee);
+                        aaaa = Integer.parseInt(donnee); //"2017 10 26"
                         compteur++;
                     } else if (compteur == 3) {
                         mm = Integer.parseInt(donnee);
@@ -145,13 +147,42 @@ public class MedicationStocksManagement {
                 }
         }
     }
-        //fonction pour lire la date
-        public static String readDate (String line){
-            line = line.replace("-", " ");
-            line = line.replace("DATE", "");
-            line = line.replace(";", "");
-            line = line.trim().replaceAll("\\s+", " ");
-            // String[] parties = line.split(" ");
-            return line;
+    //fonction pour lire la date
+    public static String readDate (String line) {
+        line = line.replace("-", " ");
+        line = line.replace("DATE", "");
+        line = line.replace(";", "");
+        line = line.trim().replaceAll("\\s+", " ");
+        // String[] parties = line.split(" ");
+        return line;
+    }
+    public static int nbrJrMm(int month, int year){
+        int[] nbrJr = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (month == 2){
+            return 29;
         }
+        else {
+            return nbrJr[month-1];
+        }
+    }
+
+    public static Date date(Date date, TreeSet<Medicament> treeSet, File file){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            if (treeSet.isEmpty()){
+                writer.write(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + "OK");
+            }
+            else {
+                writer.write(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + " COMMANDES :");
+                for (Medicament medicament : treeSet) {
+                    writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande());
+                }
+                treeSet.clear();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return date;
+    }
+
 }

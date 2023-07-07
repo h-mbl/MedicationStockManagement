@@ -4,6 +4,7 @@ public class Medicament {
     private int aaaa;
     private int mm;
     private int jj;
+    private int quantiteCommande;
 
     public Medicament(String nom, int quantite, int aaaa, int mm, int jj) {
         this.nom = nom;
@@ -15,6 +16,14 @@ public class Medicament {
 
 
     // Getters et setters (méthodes d'accès) pour les attributs
+
+    public int getQuantiteCommande() {
+        return quantiteCommande;
+    }
+
+    public void setQuantiteCommande(int quantiteCommande) {
+        this.quantiteCommande = quantiteCommande;
+    }
 
     public String getNom() {
         return nom;
@@ -41,4 +50,3 @@ public class Medicament {
     }
 
 }
-
