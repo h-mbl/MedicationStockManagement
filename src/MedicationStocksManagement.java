@@ -58,7 +58,6 @@ public class MedicationStocksManagement {
             throw new RuntimeException(e);
         }
     }
-    //test commit
     private static void readFile(String inputFile) throws FileNotFoundException {
 
         File file = new File(inputFile);
