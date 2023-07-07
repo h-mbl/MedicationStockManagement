@@ -6,6 +6,10 @@ public class Medicament implements Comparable<Medicament> {
     private int jj;
     private int quantiteCommande;
 
+
+    public Medicament() {
+    }
+
     public Medicament(String nom, int quantite, int aaaa, int mm, int jj) {
         this.nom = nom;
         this.quantite = quantite;

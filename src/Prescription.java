@@ -6,6 +6,9 @@ public class Prescription extends Medicament {
     private int repetition;
     private TreeSet<Medicament> commande;
 
+    public Prescription(){
+
+    }
     public Prescription(String nom, int quantite, int aaaa, int mm, int jj, String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> commande) {
         super(nom, quantite, aaaa, mm, jj);
         this.nomMedicament = nomMedicament;

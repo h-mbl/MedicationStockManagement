@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class MedicationStocksManagement {
+public class Tp2 {
     private static String date = null;
     private static String currentCategory;
     private static String nomMedicament;
@@ -190,8 +190,21 @@ public class MedicationStocksManagement {
         }
         else {return false;}
     }
-    public static Prescription prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet stock, TreeSet commande){
-        commande.add(nomMedicament);
+    public static Prescription prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, File file){
+        Medicament medicamentPrescris = new Medicament();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            for (Medicament medicament : stock) {
+                if (medicament.getNom() == nomMedicament) {
+                    medicamentPrescris = medicament;
+                    break;
+                }
+            }
+            if (medicamentPrescris.getQuantite() < doseTraitement * repetition) {
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         //return new Prescription();
     }
