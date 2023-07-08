@@ -1,4 +1,4 @@
-public class Medicament {
+public class Medicament implements Comparable<Medicament> {
     public String nom;
     private int quantite;
     private int aaaa;
@@ -47,6 +47,25 @@ public class Medicament {
 
     public int getJj() {
         return jj;
+    }
+    @Override
+    public int compareTo(Medicament other) {
+        int nameComparison = getNom().compareTo(other.getNom());
+        if (nameComparison != 0) {
+            return nameComparison;
+        }
+
+        int yearComparison = Integer.compare(getAaaa(), other.getAaaa());
+        if (yearComparison != 0) {
+            return yearComparison;
+        }
+
+        int monthComparison = Integer.compare(getMm(), other.getMm());
+        if (monthComparison != 0) {
+            return monthComparison;
+        }
+
+        return Integer.compare(getJj(), other.getJj());
     }
 
 }
