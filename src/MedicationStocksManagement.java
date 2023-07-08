@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class MedicationStocksManagement {
-    private static String date = null;
+    private static String dateStr = null;
     private static String currentCategory;
     private static String nomMedicament;
     private static int quantite;
@@ -14,7 +14,8 @@ public class MedicationStocksManagement {
     private static int repetition;
     //cette liste enregistrera l'ordre des actions à effectuer
     private static Queue<Object> fileOperation= new LinkedList<>();
-    // public static String[] parties;
+    private TreeSet<Medicament> treestock;
+    private TreeMap<String, Integer> treequantities;
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("provide input or output file names.");
@@ -29,15 +30,19 @@ public class MedicationStocksManagement {
             for (Object obj : fileOperation) {
                 if  (obj instanceof Medicament){
                     //lit la valeur contenu dans l'objet venant de la file d'attente
-                    Medicament valueObj = (Medicament) obj;
+                    Medicament valueObjApprov = (Medicament) obj;
                     //ajoute l'objet a l'arbre
                 }
                 else if (obj instanceof Prescription){
                     Prescription valueObjPrescription = (Prescription) obj;
 
                 }
-                else if (obj instanceof Stock){}
-                else{}
+                else if (obj instanceof Stock){
+                    Stock valueObjStock = (Stock) obj;
+                }
+                else{
+                    Date valueObjDate= (Date)obj;
+                }
                 fileOperation.remove();
             }
             //System.out.println(ABRTree);
@@ -61,16 +66,20 @@ public class MedicationStocksManagement {
                 currentCategory = "APPROV";
             } else if (line.indexOf("STOCK") == 0) {
                 // Marquer l'étape comme le stock initial
-                Stock stockState = new Stock(date);
+                Stock stockState = new Stock(dateStr);
                 fileOperation.add(stockState);
             } else if (line.indexOf("DATE") == 0) {
                 //currentCategory = "DATE";
                 //je place ceci ici car la date est ecrit : DATE: JJ-MM-AAAA
-                date = readDate(line);
+                dateStr = readDate(line);
+                String[] dateParts = dateStr.split(" ");
+                int year = Integer.parseInt(dateParts[0]);
+                int month = Integer.parseInt(dateParts[1]);
+                int day = Integer.parseInt(dateParts[2]);
+                Date date= new Date(year,month,day);
+                fileOperation.add(dateStr);
             } else if (line.indexOf("PRESCRIPTION") == 0) {
                 currentCategory = "PRESCRIPTION";
-                //lorsque la ligne n'est qu'un ;
-                //note : pense a efface cette condition sans bug
             } else if (line.indexOf(";") == 0) {
                 continue;
             } else {

@@ -1,0 +1,204 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class Tp2 {
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Veuillez fournir les noms des fichiers d'entrée et de sortie.");
+            return;
+        }
+
+        String inputFile = args[0];
+        String outputFile = args[1];
+
+        try {
+            StockManager stockManager = new StockManager();
+            stockManager.processTransactions(inputFile);
+            stockManager.printStock(outputFile);
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier d'entrée : " + e.getMessage());
+        }
+    }
+}
+
+class StockManager {
+    private TreeSet<Medicine> stock;
+    private TreeMap<String, Integer> quantities;
+    private Date currentDate;
+
+    public StockManager() {
+        stock = new TreeSet<>(Comparator.comparing(Medicine::getExpirationDate));
+        quantities = new TreeMap<>();
+    }
+
+    public void processTransactions(String inputFile) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                processTransaction(line);
+            }
+        }
+    }
+
+    public void processTransaction(String transaction) {
+        String[] tokens = transaction.split(" ");
+        String transactionType = tokens[0];
+
+        switch (transactionType) {
+            case "DATE":
+                String dateString = tokens[1];
+                updateCurrentDate(dateString);
+                break;
+            case "PRESCRIPTION":
+                processPrescription(tokens);
+                break;
+            case "APPROV":
+                receiveDelivery(tokens);
+                break;
+            case "STOCK":
+                printStock();
+                break;
+            default:
+                System.out.println("Transaction invalide : " + transaction);
+        }
+    }
+
+    public void receiveDelivery(String[] tokens) {
+        String medicineName = tokens[2];
+        int quantity = Integer.parseInt(tokens[3]);
+        String expirationDateString = tokens[4];
+
+        Medicine medicine = new Medicine(medicineName, expirationDateString);
+
+        stock.add(medicine);
+        quantities.merge(medicineName, quantity, Integer::sum);
+    }
+
+    public void processPrescription(String[] tokens) {
+        int numMedicines = (tokens.length - 2) / 3;
+
+        for (int i = 0; i < numMedicines; i++) {
+            String medicineName = tokens[2 + (i * 3)];
+            int quantity = Integer.parseInt(tokens[3 + (i * 3)]);
+            int repetitions = Integer.parseInt(tokens[4 + (i * 3)]);
+
+            Date endDate = calculateEndDate(repetitions);
+            Medicine requestedMedicine = new Medicine(medicineName, endDate);
+
+            Medicine availableMedicine = getAvailableMedicine(requestedMedicine);
+
+            if (availableMedicine != null && availableMedicine.getQuantity() >= quantity) {
+                quantities.put(medicineName, quantities.get(medicineName) - quantity);
+                availableMedicine.setQuantity(availableMedicine.getQuantity() - quantity);
+                System.out.println("PRESCRIPTION " + (i + 1) + " " + medicineName + " " + quantity + " " + repetitions + " OK");
+            } else {
+                System.out.println("PRESCRIPTION " + (i + 1) + " " + medicineName + " " + quantity + " " + repetitions + " COMMANDE");
+            }
+        }
+    }
+
+    public void updateCurrentDate(String dateString) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            currentDate = format.parse(dateString);
+
+            generateOrders();
+
+            System.out.println(dateString + " OK");
+        } catch (ParseException e) {
+            System.out.println("Date invalide : " + dateString);
+        }
+    }
+
+    public void generateOrders() {
+        for (Map.Entry<String, Integer> entry : quantities.entrySet()) {
+            String medicineName = entry.getKey();
+            int quantity = entry.getValue();
+
+            if (quantity > 0) {
+                System.out.println(currentDate + " COMMANDES :");
+                System.out.println(medicineName + " " + quantity);
+            }
+        }
+        quantities.clear();
+    }
+
+    public void printStock(String outputFile) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
+            for (Medicine medicine : stock) {
+                writer.println(medicine.getName() + " " + medicine.getQuantity() + " " + medicine.getExpirationDate());
+            }
+        }
+    }
+
+    private Date calculateEndDate(int repetitions) {
+        // Calcul de la date de fin de traitement en fonction de la date courante et du nombre de répétitions
+        // à adapter en fonction de la logique spécifique à votre programme
+        return currentDate;
+    }
+
+    private Medicine getAvailableMedicine(Medicine requestedMedicine) {
+        for (Medicine medicine : stock) {
+            if (medicine.getName().equals(requestedMedicine.getName())
+                    && medicine.getExpirationDate().compareTo(requestedMedicine.getExpirationDate()) <= 0
+                    && medicine.getQuantity() > 0) {
+                return medicine;
+            }
+        }
+        return null;
+    }
+}
+
+class Medicine {
+    private String name;
+    private int quantity;
+    private Date expirationDate;
+
+    public Medicine(String name, String expirationDateString) {
+        this.name = name;
+        this.expirationDate = parseDate(expirationDateString);
+        this.quantity = 0;
+    }
+
+    public Medicine(String name, Date expirationDate) {
+        this.name = name;
+        this.expirationDate = expirationDate;
+        this.quantity = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+       return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    private Date parseDate(String dateString) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            return format.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println("Date invalide : " + dateString);
+            return null;
+        }
+    }
+}
