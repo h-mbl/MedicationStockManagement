@@ -153,10 +153,33 @@ public class Tp2 {
     public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, String file){
         Medicament medicamentPrescris = new Medicament();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            if (stock.isEmpty()){
+                writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                commande.add(medicamentPrescris);
+            }
             for (Medicament medicament : stock) {
                 if (medicament.getNom().equals(nomMedicament)) {
                     medicamentPrescris = medicament;
-                    if (datePasse(medicamentPrescris.getDateExpiration(), dateCourante))
+                    if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
+                        if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
+                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK");
+                            break;
+                        }
+                        else {
+                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                            commande.add(medicamentPrescris);
+                            break;
+                        }
+                    }
+                    else {
+                        writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                        commande.add(medicamentPrescris);
+                        break;
+                    }
+                }
+                else {
+                    writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                    commande.add(medicamentPrescris);
                     break;
                 }
             }

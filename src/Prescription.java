@@ -15,8 +15,7 @@ public class Prescription extends Medicament{
         this.repetition = repetition;
     }
 
-    public Prescription(String nom, int quantite, int aaaa, int mm, int jj, String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> commande) {
-        super(nom, quantite, aaaa, mm, jj);
+    public Prescription(String nom, Date date, String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> commande) {
         this.nomMedicament = nomMedicament;
         this.doseTraitement = doseTraitement;
         this.repetition = repetition;
