@@ -1,7 +1,9 @@
 import java.io.*;
 //import java.lang.foreign.ValueLayout;
-import java.util.*;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
 
 
 public class Tp2 {
@@ -92,15 +94,16 @@ public class Tp2 {
 
         return prescriptionsList;
     }
-    public static boolean datePasse(Date dateAVerifie, Date dateCourante ){
-        if (dateAVerifie.getYear() < dateCourante.getYear()){
+    public static boolean datePasse(Date dateAVerifie, Date dateCourante) {
+        if (dateAVerifie.getYear() < dateCourante.getYear()) {
             return true;
-        } else if (dateAVerifie.getMonth() < dateCourante.getMonth()) {
+        } else if (dateAVerifie.getYear() == dateCourante.getYear() && dateAVerifie.getMonth() < dateCourante.getMonth()) {
             return true;
-        } else if (dateAVerifie.getDay() < dateCourante.getDay()) {
+        } else if (dateAVerifie.getYear() == dateCourante.getYear() && dateAVerifie.getMonth() == dateCourante.getMonth() && dateAVerifie.getDay() < dateCourante.getDay()) {
             return true;
+        } else {
+            return false;
         }
-        else {return false;}
     }
     public static Date calculerJour(int days, int day, int month, int year){
         int newDay = day + days;
@@ -145,8 +148,6 @@ public class Tp2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return date;
     }
     public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, String file){
@@ -155,7 +156,7 @@ public class Tp2 {
             for (Medicament medicament : stock) {
                 if (medicament.getNom().equals(nomMedicament)) {
                     medicamentPrescris = medicament;
-                    if (medicamentPrescris.getDateExpiration())
+                    if (datePasse(medicamentPrescris.getDateExpiration(), dateCourante))
                     break;
                 }
             }

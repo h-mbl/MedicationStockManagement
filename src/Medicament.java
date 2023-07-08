@@ -1,3 +1,4 @@
+
 public class Medicament implements Comparable<Medicament> {
     public String nom;
     private int quantite;
