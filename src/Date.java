@@ -1,4 +1,4 @@
-public class Date {
+public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
@@ -31,5 +31,20 @@ public class Date {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    @Override
+    public int compareTo(Date other) {
+        int yearComparison = Integer.compare(year, other.getYear());
+        if (yearComparison != 0) {
+            return yearComparison;
+        }
+
+        int monthComparison = Integer.compare(month, other.getMonth());
+        if (monthComparison != 0) {
+            return monthComparison;
+        }
+
+        return Integer.compare(day, other.getDay());
     }
 }

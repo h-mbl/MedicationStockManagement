@@ -1,23 +1,22 @@
 public class Medicament implements Comparable<Medicament> {
     public String nom;
     private int quantite;
-    private int aaaa;
-    private int mm;
-    private int jj;
+    private Date dateExpiration;
+    private Date dateCourante;
+
     private int quantiteCommande;
 
 
     public Medicament() {
     }
 
-    public Medicament(String nom, int quantite, int aaaa, int mm, int jj) {
+    public Medicament(String nom, int quantite, Date dateExpiration, Date dateCourante, int quantiteCommande) {
         this.nom = nom;
         this.quantite = quantite;
-        this.aaaa = aaaa;
-        this.mm = mm;
-        this.jj = jj;
+        this.dateExpiration = dateExpiration;
+        this.dateCourante = dateCourante;
+        this.quantiteCommande = quantiteCommande;
     }
-
 
     // Getters et setters (méthodes d'accès) pour les attributs
 
@@ -37,21 +36,30 @@ public class Medicament implements Comparable<Medicament> {
         return quantite;
     }
 
-
-    public int getAaaa() {
-        return aaaa;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-
-
-    public int getMm() {
-        return mm;
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 
-
-    public int getJj() {
-        return jj;
+    public Date getDateExpiration() {
+        return dateExpiration;
     }
+
+    public void setDateExpiration(Date dateExpiration) {
+        this.dateExpiration = dateExpiration;
+    }
+
+    public Date getDateCourante() {
+        return dateCourante;
+    }
+
+    public void setDateCourante(Date dateCourante) {
+        this.dateCourante = dateCourante;
+    }
+
     @Override
     public int compareTo(Medicament other) {
         int nameComparison = getNom().compareTo(other.getNom());
@@ -59,17 +67,17 @@ public class Medicament implements Comparable<Medicament> {
             return nameComparison;
         }
 
-        int yearComparison = Integer.compare(getAaaa(), other.getAaaa());
-        if (yearComparison != 0) {
-            return yearComparison;
+        int expirationComparison = getDateExpiration().compareTo(other.getDateExpiration());
+        if (expirationComparison != 0) {
+            return expirationComparison;
         }
 
-        int monthComparison = Integer.compare(getMm(), other.getMm());
-        if (monthComparison != 0) {
-            return monthComparison;
+        int currentComparison = getDateCourante().compareTo(other.getDateCourante());
+        if (currentComparison != 0) {
+            return currentComparison;
         }
 
-        return Integer.compare(getJj(), other.getJj());
+        return Integer.compare(getQuantiteCommande(), other.getQuantiteCommande());
     }
 
 }

@@ -146,6 +146,7 @@ public class Tp2 {
             e.printStackTrace();
         }
 
+
         return date;
     }
     public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, String file){
@@ -154,8 +155,7 @@ public class Tp2 {
             for (Medicament medicament : stock) {
                 if (medicament.getNom().equals(nomMedicament)) {
                     medicamentPrescris = medicament;
-                    if (medicamentPrescris.getQuantite() < doseTraitement * repetition) {
-                    }
+                    if (medicamentPrescris.getDateExpiration())
                     break;
                 }
             }
