@@ -1,11 +1,11 @@
 import java.io.*;
 //import java.lang.foreign.ValueLayout;
 import java.util.*;
+import java.util.Date;
 
 
 public class Tp2 {
-    private static String date = null;
-    private static String currentCategory;
+    /*
     private static String nomMedicament;
     private static int quantite;
     private static int aaaa;
@@ -13,14 +13,16 @@ public class Tp2 {
     private static int jj;
     private static int doseTraitement;
     private static int repetition;
+
+     */
     //cette liste enregistrera l'ordre des actions à effectuer
+    /*
     private static Queue<Object> fileOperation= new LinkedList<>();
     private static Map<String, Medicament> treeMap = new TreeMap<>();
     private static TreeSet<Medicament> treeSet = new TreeSet<>();
+     */
+    private static TreeSet<Medicament> treeSet = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
-
-
-
     // public static String[] parties;
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -34,8 +36,27 @@ public class Tp2 {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String commande = line.split(" ")[0];
-                System.out.println(line);
-                System.out.println(commande);
+                switch (commande){
+                    case "DATE":
+                        String dateLine = readDate(line);
+                        String[] date = dateLine.split(" ");
+                        dateCourante = new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+                        dateCourante = date(dateCourante, treeSet, outputFile);
+                        break;
+                    case "PRESCRIPTION":
+                        //readPrecription
+                        //prescription(String nomMedicament, int doseTraitement,
+                        // int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, File file)
+                        //System.out.println("Prescription commande");
+
+                        break;
+                    case "APPROV":
+                        //System.out.println("Approv commande");
+                        break;
+                    case "STOCK":
+                        //System.out.println("Stock commande");
+                        break;
+                }
 
             }
         } catch (FileNotFoundException e) {
@@ -55,6 +76,16 @@ public class Tp2 {
         line = line.trim().replaceAll("\\s+", " ");
         // String[] parties = line.split(" ");
         return line;
+    }
+    //fonction pour lire la prescription
+    public static List<Prescription> readPrescription (BufferedReader bufferedReader, String line) throws IOException {
+        List<Prescription> prescriptionsList = new ArrayList<>();
+        while ((line = bufferedReader.readLine()).equals(";")) {
+            String[] prescriptionLine = line.split(" ");
+            prescriptionsList.add(new Prescription(prescriptionLine[0], Integer.parseInt(prescriptionLine[1]), Integer.parseInt(prescriptionLine[2])));
+        }
+
+        return prescriptionsList;
     }
     public static boolean datePasse(Date dateAVerifie, Date dateCourante ){
         if (dateAVerifie.getYear() < dateCourante.getYear()){
@@ -90,6 +121,28 @@ public class Tp2 {
         }
         else {return false;}
     }
+    public static String writeDate(Date date){
+        return (date.getYear() + "-" + date.getMonth() + "-" + date.getDay());
+    }
+
+    public static Date date(Date date, TreeSet<Medicament> commande, String file){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            if (commande.isEmpty()){
+                writer.write(writeDate(date) + " OK\n");
+            }
+            else {
+                writer.write(writeDate(date) + " COMMANDES :");
+                for (Medicament medicament : commande) {
+                    writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande());
+                }
+                commande.clear();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return date;
+    }
     public static Prescription prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, File file){
         Medicament medicamentPrescris = new Medicament();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
@@ -108,24 +161,6 @@ public class Tp2 {
 
         //return new Prescription();
         return new Prescription();
-    }
-    public static Date date(Date date, TreeSet<Medicament> commande, File file){
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            if (commande.isEmpty()){
-                writer.write(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + "OK");
-            }
-            else {
-                writer.write(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + " COMMANDES :");
-                for (Medicament medicament : commande) {
-                    writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande());
-                }
-                commande.clear();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return date;
     }
 
 }
