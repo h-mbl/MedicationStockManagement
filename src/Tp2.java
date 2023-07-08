@@ -21,7 +21,8 @@ public class Tp2 {
     private static Map<String, Medicament> treeMap = new TreeMap<>();
     private static TreeSet<Medicament> treeSet = new TreeSet<>();
      */
-    private static TreeSet<Medicament> treeSet = new TreeSet<>();
+    private static TreeSet<Medicament> arbreCommande = new TreeSet<>();
+    private static TreeSet<Medicament> stock = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
     // public static String[] parties;
     public static void main(String[] args) {
@@ -41,14 +42,18 @@ public class Tp2 {
                         String dateLine = readDate(line);
                         String[] date = dateLine.split(" ");
                         dateCourante = new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
-                        dateCourante = date(dateCourante, treeSet, outputFile);
+                        dateCourante = date(dateCourante, arbreCommande, outputFile);
                         break;
                     case "PRESCRIPTION":
-                        //readPrecription
-                        //prescription(String nomMedicament, int doseTraitement,
-                        // int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, File file)
+                        List<Prescription> prescriptionList = new ArrayList<>();
+                        prescriptionList = readPrescription(bufferedReader, line);
+                        for (Prescription prescription: prescriptionList) {
+                            String nomMedicament = prescription.getNomMedicament();
+                            int doseTraitement = prescription.getDoseTraitement();
+                            int repetition = prescription.getRepetition();
+                            prescription(nomMedicament, doseTraitement, repetition, stock, arbreCommande, outputFile);
+                        }
                         //System.out.println("Prescription commande");
-
                         break;
                     case "APPROV":
                         //System.out.println("Approv commande");
@@ -143,24 +148,22 @@ public class Tp2 {
 
         return date;
     }
-    public static Prescription prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, File file){
+    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, String file){
         Medicament medicamentPrescris = new Medicament();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             for (Medicament medicament : stock) {
-                if (medicament.getNom() == nomMedicament) {
+                if (medicament.getNom().equals(nomMedicament)) {
                     medicamentPrescris = medicament;
+                    if (medicamentPrescris.getQuantite() < doseTraitement * repetition) {
+                    }
                     break;
                 }
-            }
-            if (medicamentPrescris.getQuantite() < doseTraitement * repetition) {
-
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         //return new Prescription();
-        return new Prescription();
     }
 
 }
