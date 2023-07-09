@@ -204,9 +204,12 @@ public class Tp2 {
             if (medicament.getNom().equals(nomMedicament)) {
                 medicamentPrescris = medicament;
                 if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
+                    System.out.println(medicamentPrescris.getNom() + " " + medicamentPrescris.getQuantite());
+                    System.out.println(medicamentPrescris.getNom() + " " +  medicamentPrescris.getQuantiteCommande());
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
-                        medicament.setQuantite(medicament.getQuantiteCommande() - doseTraitement*repetition);
+                        medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
+                        System.out.println(medicamentPrescris.getQuantite());
                         break;
                     }
                     else {
@@ -215,8 +218,6 @@ public class Tp2 {
                         if (commande.containsKey(key)){
                             // Changement du nombre de medicament donné à commander
                             Medicament medicamentCommande = commande.get(key);
-                            System.out.println("commande " + medicamentCommande.getQuantiteCommande());
-                            System.out.println("prescris" + medicamentPrescris.getQuantiteCommande());
                             medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                             commande.put(key, medicamentCommande);
                         }
@@ -232,8 +233,6 @@ public class Tp2 {
                     if (commande.containsKey(key)){
                         // Changement du nombre de medicament donné à commander
                         Medicament medicamentCommande = commande.get(key);
-                        System.out.println("commande " + medicamentCommande.getQuantiteCommande());
-                        System.out.println("prescris" + medicamentPrescris.getQuantiteCommande());
                         medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                         commande.put(key, medicamentCommande);
                     }
@@ -249,11 +248,8 @@ public class Tp2 {
                 if (commande.containsKey(key)){
                     // Changement du nombre de medicament donné à commandé
                     Medicament medicamentCommande = commande.get(key);
-                    System.out.println("commande " + medicamentCommande.getQuantiteCommande());
-                    System.out.println("prescris" + medicamentPrescris.getQuantiteCommande());
                     medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                     commande.put(key, medicamentCommande);
-                    //commit try
                 }
                 else {
                     commande.put(key, medicamentPrescris);
