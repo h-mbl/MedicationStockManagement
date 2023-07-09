@@ -74,11 +74,11 @@ public class Medicament implements Comparable<Medicament> {
             return expirationComparison;
         }
 
-        int currentComparison = getDateCourante().compareTo(other.getDateCourante());
+       /*int currentComparison = getDateCourante().compareTo(other.getDateCourante());
         if (currentComparison != 0) {
             return currentComparison;
         }
-
+*/
         return Integer.compare(getQuantiteCommande(), other.getQuantiteCommande());
     }
 

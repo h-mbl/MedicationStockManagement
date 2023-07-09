@@ -10,22 +10,6 @@ import java.util.*;
 
 
 public class Tp2 {
-    /*
-    private static String nomMedicament;
-    private static int quantite;
-    private static int aaaa;
-    private static int mm;
-    private static int jj;
-    private static int doseTraitement;
-    private static int repetition;
-
-     */
-    //cette liste enregistrera l'ordre des actions à effectuer
-    /*
-    private static Queue<Object> fileOperation= new LinkedList<>();
-    private static Map<String, Medicament> treeMap = new TreeMap<>();
-    private static TreeSet<Medicament> treeSet = new TreeSet<>();
-     */
     private static TreeSet<Medicament> arbreCommande = new TreeSet<>();
     private static TreeSet<Medicament> stock = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
@@ -58,7 +42,6 @@ public class Tp2 {
                             String nomMedicament = prescription.getNomMedicament();
                             int doseTraitement = prescription.getDoseTraitement();
                             int repetition = prescription.getRepetition();
-                            System.out.println( prescription.getNomMedicament());
                             prescription(nomMedicament, doseTraitement, repetition, stock, arbreCommande, outputFile);
                         }
                         //System.out.println("Prescription commande");
@@ -68,29 +51,44 @@ public class Tp2 {
                         approvListr = readApprov(bufferedReader, line) ;
                        // System.out.println(approvListr);
                         for (Medicament medicament:approvListr) {
-                            System.out.println("je suis ici 1");
-                            System.out.println(medicament);
                             String nomMedicament = medicament.getNom();
                             int quantite= medicament.getQuantiteCommande();
                             Date dateExpiration= medicament.getDateExpiration();
-                            //ajoute à l'arbre
-                            //approv(nomMedicament,quantite,dateExpiration, stock);
                             stock.add(medicament);
                         }
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
 
                             writer.write("APPROV OK");
                             writer.newLine();
-                          //  System.out.println("------");
-                           // System.out.println(stock);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
 
                         break;
                     case "STOCK":
-                        //System.out.println("Stock commande");
-                        break;
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
+
+                            writer.write("STOCK" +" "+dateCourante.getYear()+"-"+dateCourante.getMonth()+"-"+
+                                    dateCourante.getDay());
+                            writer.newLine();
+                            Iterator<Medicament> iterator = stock.iterator();
+                            while (iterator.hasNext()) {
+                                Medicament medicament = iterator.next();
+                                // Vérifier si la date de l'élément est inférieure à la date courante
+                                if (medicament.getDateExpiration().getYear()< dateCourante.getYear() &&
+                                        medicament.getDateExpiration().getMonth()< dateCourante.getMonth() &&
+                                medicament.getDateExpiration().getDay()< dateCourante.getDay() ) {
+                                    iterator.remove();
+                                } else {
+                                    writer.write(medicament.getNom() + " " + medicament.getQuantite() + " " +
+                                            medicament.getDateExpiration().getYear() + "-" + medicament.getDateExpiration().getMonth() + "-" +
+                                            medicament.getDateExpiration().getDay());
+                                    writer.newLine();
+                                }
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                 }
 
             }
@@ -126,13 +124,11 @@ public class Tp2 {
     }
     public static List<Medicament> readApprov (BufferedReader bufferedReader, String line) throws IOException {
         List<Medicament> approvList = new ArrayList<>();
-        while ((line = bufferedReader.readLine()).equals(";")) {
+        while (!(line = bufferedReader.readLine()).equals(";")) {
+            line = line.replace("-", " ");
             String[] approvLine = line.split(" ");
             Date dateExpiration= new Date( Integer.parseInt(approvLine[2]), Integer.parseInt(approvLine[3]),Integer.parseInt(approvLine[4]));
-            System.out.println("je suis ici 2");
-            System.out.println(approvLine);
             approvList.add(new Medicament(approvLine[0], Integer.parseInt(approvLine[1]),dateExpiration));
-
         }
         return approvList;
     }
@@ -236,12 +232,12 @@ public class Tp2 {
 
         //return new Prescription();
     }
-    public static TreeSet approv(String nomMedicament, int quantite, Date dateExpiration, TreeSet<Medicament> stock){
+   /* public static TreeSet approv(String nomMedicament, int quantite, Date dateExpiration, TreeSet<Medicament> stock){
         Medicament medicamentPrescris = new Medicament();
 
 
         //return new Prescription();
         return stock;
-    }
+    }*/
 
 }
