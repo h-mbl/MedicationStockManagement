@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="changement treeset de commande à un treemap">
+    <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="accept">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tp2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tp2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCode/ex1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testCode/ex1Out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1Out.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/exemple2+.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/exemple2+.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +47,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.comparateur">
     <configuration name="Tp2" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tp2" />
       <module name="MedicationStockManagement" />
@@ -54,6 +56,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="comparateur" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="CompareFiles" />
+      <module name="MedicationStockManagement" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Tp2" />
+      <item itemvalue="Application.comparateur" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -68,7 +81,6 @@
       <workItem from="1688769020044" duration="84000" />
       <workItem from="1688772906671" duration="7000" />
       <workItem from="1688772933896" duration="1324000" />
-      <workItem from="1688936913296" duration="1330000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1687035988104</created>
@@ -105,14 +117,7 @@
       <option name="project" value="LOCAL" />
       <updated>1688769683531</updated>
     </task>
-    <task id="LOCAL-00006" summary="changement treeset de commande à un treemap">
-      <created>1688936953307</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1688936953307</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,7 +128,6 @@
     <MESSAGE value="date management" />
     <MESSAGE value="date passe boolean" />
     <MESSAGE value="accept" />
-    <MESSAGE value="changement treeset de commande à un treemap" />
-    <option name="LAST_COMMIT_MESSAGE" value="changement treeset de commande à un treemap" />
+    <option name="LAST_COMMIT_MESSAGE" value="accept" />
   </component>
 </project>

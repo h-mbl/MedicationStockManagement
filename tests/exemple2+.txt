@@ -15,14 +15,14 @@ Medicament49 88 2013-09-01
 Medicament9 59 2018-08-07
 
 PRESCRIPTION 1
-Medicament1 5 6  COMMANDE
-Medicament9 30 6  COMMANDE
-Medicament3 5 1  COMMANDE
+Medicament1 5 6 COMMANDE
+Medicament9 30 6 COMMANDE
+Medicament3 5 1 COMMANDE
 
 PRESCRIPTION 2
-Medicament1 14 2  COMMANDE
-Medicament9 4 1  OK
-Medicament2 4 1  COMMANDE
+Medicament1 14 2 COMMANDE
+Medicament9 4 1 OK
+Medicament2 4 1 COMMANDE
 
 PRESCRIPTION 3
 Medicament3 2 1  COMMANDE
