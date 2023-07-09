@@ -247,7 +247,7 @@ public class Tp2 {
                 writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
                 String key = medicamentPrescris.getNom();
                 if (commande.containsKey(key)){
-                    // Changement du nombre de medicament donné à commander
+                    // Changement du nombre de medicament donné à commandé
                     Medicament medicamentCommande = commande.get(key);
                     System.out.println("commande " + medicamentCommande.getQuantiteCommande());
                     System.out.println("prescris" + medicamentPrescris.getQuantiteCommande());
