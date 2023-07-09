@@ -2,6 +2,7 @@
 public class Medicament implements Comparable<Medicament> {
     public String nom;
     private int quantite;
+
     private Date dateExpiration;
     private Date dateCourante;
 
@@ -10,7 +11,17 @@ public class Medicament implements Comparable<Medicament> {
 
     public Medicament() {
     }
-
+    public Medicament(String nom, int quantiteCommande){
+        this.nom = nom;
+        this.quantiteCommande = quantiteCommande;
+    }
+    public Medicament(String nom, int quantite, Date dateExpiration) {
+        this.nom = nom;
+        this.quantite = quantite;
+        this.dateExpiration = dateExpiration;
+        this.dateCourante = dateCourante;
+        this.quantiteCommande = quantiteCommande;
+    }
     public Medicament(String nom, int quantite, Date dateExpiration, Date dateCourante, int quantiteCommande) {
         this.nom = nom;
         this.quantite = quantite;
@@ -67,15 +78,17 @@ public class Medicament implements Comparable<Medicament> {
         if (nameComparison != 0) {
             return nameComparison;
         }
-
-        int expirationComparison = getDateExpiration().compareTo(other.getDateExpiration());
-        if (expirationComparison != 0) {
-            return expirationComparison;
+        if (other.getDateExpiration() != null) {
+            int expirationComparison = getDateExpiration().compareTo(other.getDateExpiration());
+            if (expirationComparison != 0) {
+                return expirationComparison;
+            }
         }
-
-        int currentComparison = getDateCourante().compareTo(other.getDateCourante());
-        if (currentComparison != 0) {
-            return currentComparison;
+        if (other.getDateCourante() != null){
+            int currentComparison = getDateCourante().compareTo(other.getDateCourante());
+            if (currentComparison != 0) {
+                return currentComparison;
+            }
         }
 
         return Integer.compare(getQuantiteCommande(), other.getQuantiteCommande());

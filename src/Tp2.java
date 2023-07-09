@@ -1,6 +1,7 @@
 import java.io.*;
 //import java.lang.foreign.ValueLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -37,6 +38,7 @@ public class Tp2 {
         try (FileReader fileReader = new FileReader(inputFile);
              BufferedReader bufferedReader = new BufferedReader(fileReader)){
             String line;
+            int compteurPrescription = 0;
             while ((line = bufferedReader.readLine()) != null) {
                 String commande = line.split(" ")[0];
                 switch (commande){
@@ -47,21 +49,67 @@ public class Tp2 {
                         dateCourante = date(dateCourante, arbreCommande, outputFile);
                         break;
                     case "PRESCRIPTION":
-                        List<Prescription> prescriptionList = new ArrayList<>();
-                        prescriptionList = readPrescription(bufferedReader, line);
-                        for (Prescription prescription: prescriptionList) {
-                            String nomMedicament = prescription.getNomMedicament();
-                            int doseTraitement = prescription.getDoseTraitement();
-                            int repetition = prescription.getRepetition();
-                            prescription(nomMedicament, doseTraitement, repetition, stock, arbreCommande, outputFile);
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
+                            compteurPrescription += 1;
+                            System.out.println("prescription line");
+                            writer.write("PRESCRIPTION" + compteurPrescription + "\n");
+                            List<Prescription> prescriptionList = new ArrayList<>();
+                            prescriptionList = readPrescription(bufferedReader, line);
+                            for (Prescription prescription : prescriptionList) {
+                                String nomMedicament = prescription.getNomMedicament();
+                                int doseTraitement = prescription.getDoseTraitement();
+                                int repetition = prescription.getRepetition();
+                                prescription(nomMedicament, doseTraitement, repetition, stock, arbreCommande, writer);
+                                System.out.println("appel de la fonction prescription");
+                            }
                         }
-                        //System.out.println("Prescription commande");
+                        catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
                         break;
                     case "APPROV":
-                        //System.out.println("Approv commande");
+                        List<Medicament> approvListr = new ArrayList<>();
+                        approvListr = readApprov(bufferedReader, line) ;
+                        // System.out.println(approvListr);
+                        for (Medicament medicament:approvListr) {
+                            String nomMedicament = medicament.getNom();
+                            int quantite= medicament.getQuantiteCommande();
+                            Date dateExpiration= medicament.getDateExpiration();
+                            stock.add(medicament);
+                        }
+                        try (BufferedWriter writerApprov = new BufferedWriter(new FileWriter(outputFile, true))) {
+
+                            writerApprov.write("APPROV OK");
+                            writerApprov.newLine();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                     case "STOCK":
-                        //System.out.println("Stock commande");
+                        try (BufferedWriter writerStock = new BufferedWriter(new FileWriter(outputFile, true))) {
+
+                            writerStock.write("STOCK" +" "+dateCourante.getYear()+"-"+dateCourante.getMonth()+"-"+
+                                    dateCourante.getDay());
+                            writerStock.newLine();
+                            Iterator<Medicament> iterator = stock.iterator();
+                            while (iterator.hasNext()) {
+                                Medicament medicament = iterator.next();
+                                // Vérifier si la date de l'élément est inférieure à la date courante
+                                if (medicament.getDateExpiration().getYear()< dateCourante.getYear() &&
+                                        medicament.getDateExpiration().getMonth()< dateCourante.getMonth() &&
+                                        medicament.getDateExpiration().getDay()< dateCourante.getDay() ) {
+                                    iterator.remove();
+                                } else {
+                                    writerStock.write(medicament.getNom() + " " + medicament.getQuantite() + " " +
+                                            medicament.getDateExpiration().getYear() + "-" + medicament.getDateExpiration().getMonth() + "-" +
+                                            medicament.getDateExpiration().getDay());
+                                    writerStock.newLine();
+                                }
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                 }
 
@@ -87,12 +135,22 @@ public class Tp2 {
     //fonction pour lire la prescription
     public static List<Prescription> readPrescription (BufferedReader bufferedReader, String line) throws IOException {
         List<Prescription> prescriptionsList = new ArrayList<>();
-        while ((line = bufferedReader.readLine()).equals(";")) {
-            String[] prescriptionLine = line.split(" ");
+        while (!(line = bufferedReader.readLine()).equals(";")) {
+            String[] prescriptionLine = line.split("\\s+");
             prescriptionsList.add(new Prescription(prescriptionLine[0], Integer.parseInt(prescriptionLine[1]), Integer.parseInt(prescriptionLine[2])));
         }
 
         return prescriptionsList;
+    }
+    public static List<Medicament> readApprov (BufferedReader bufferedReader, String line) throws IOException {
+        List<Medicament> approvList = new ArrayList<>();
+        while (!(line = bufferedReader.readLine()).equals(";")) {
+            line = line.replace("-", " ");
+            String[] approvLine = line.split(" ");
+            Date dateExpiration= new Date( Integer.parseInt(approvLine[2]), Integer.parseInt(approvLine[3]),Integer.parseInt(approvLine[4]));
+            approvList.add(new Medicament(approvLine[0], Integer.parseInt(approvLine[1]),dateExpiration));
+        }
+        return approvList;
     }
     public static boolean datePasse(Date dateAVerifie, Date dateCourante) {
         if (dateAVerifie.getYear() < dateCourante.getYear()) {
@@ -139,22 +197,22 @@ public class Tp2 {
                 writer.write(writeDate(date) + " OK\n");
             }
             else {
-                writer.write(writeDate(date) + " COMMANDES :");
+                writer.write(writeDate(date) + " COMMANDES :\n");
                 for (Medicament medicament : commande) {
-                    writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande());
+                    writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande() + "\n");
                 }
                 commande.clear();
             }
+            writer.write("\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
         return date;
     }
-    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, String file){
-        Medicament medicamentPrescris = new Medicament();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, BufferedWriter writer) throws IOException {
+        Medicament medicamentPrescris = new Medicament(nomMedicament, (doseTraitement*repetition));
             if (stock.isEmpty()){
-                writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
                 commande.add(medicamentPrescris);
             }
             for (Medicament medicament : stock) {
@@ -162,32 +220,29 @@ public class Tp2 {
                     medicamentPrescris = medicament;
                     if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
                         if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
-                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK");
+                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
                             break;
                         }
                         else {
-                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
                             commande.add(medicamentPrescris);
                             break;
                         }
                     }
                     else {
-                        writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                        writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
                         commande.add(medicamentPrescris);
                         break;
                     }
                 }
                 else {
-                    writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE");
+                    writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
                     commande.add(medicamentPrescris);
                     break;
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         //return new Prescription();
     }
 
-}
