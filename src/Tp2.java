@@ -1,14 +1,10 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 
 
 public class Tp2 {
 
-    private static TreeSet<Medicament> arbreCommande = new TreeSet<>();
+    private static TreeMap<String,Medicament> arbreCommande = new TreeMap<>();
     private static TreeSet<Medicament> stock = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
     public static void main(String[] args) {
@@ -170,14 +166,15 @@ public class Tp2 {
         return (date.getYear() + "-" +  String.format("%02d", date.getMonth()) + "-" + String.format("%02d", date.getDay()));
     }
 
-    public static Date date(Date date, TreeSet<Medicament> commande, String file){
+    public static Date date(Date date, TreeMap<String,Medicament> commande, String file){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             if (commande.isEmpty()){
                 writer.write(writeDate(date) + " OK\n");
             }
             else {
                 writer.write(writeDate(date) + " COMMANDES :\n");
-                for (Medicament medicament : commande) {
+                for (String nomMedicament : commande.keySet()) {
+                    Medicament medicament = commande.get(nomMedicament);
                     writer.write(medicament.getNom() + " " + medicament.getQuantiteCommande() + "\n");
                 }
                 commande.clear();
@@ -188,11 +185,22 @@ public class Tp2 {
         }
         return date;
     }
-    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, BufferedWriter writer) throws IOException {
+    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeMap<String,Medicament> commande, BufferedWriter writer) throws IOException {
         Medicament medicamentPrescris = new Medicament(nomMedicament, (doseTraitement*repetition));
         if (stock.isEmpty()){
             writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
-            commande.add(medicamentPrescris);
+
+            String key = medicamentPrescris.getNom();
+            if (commande.containsKey(key)){
+                // Changement du nombre de medicament donné à commander
+                Medicament medicamentCommande = commande.get(key);
+                medicamentCommande.setQuantite(medicamentCommande.getQuantite() + medicamentPrescris.getQuantite());
+                commande.put(key, medicamentCommande);
+            }
+            else {
+                commande.put(key, medicamentPrescris);
+                System.out.println("added to treeemap");
+            }
         }
         for (Medicament medicament : stock) {
             if (medicament.getNom().equals(nomMedicament)) {
@@ -205,20 +213,33 @@ public class Tp2 {
                     }
                     else {
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
-                        commande.add(medicamentPrescris);
+                        String key = medicamentPrescris.getNom();
+                        if (commande.containsKey(key)){
+                            // Changement du nombre de medicament donné à commander
+                            Medicament medicamentCommande = commande.get(key);
+                            medicamentCommande.setQuantite(medicamentCommande.getQuantite() + medicamentPrescris.getQuantite());
+                            commande.put(key, medicamentCommande);
+                        }
+                        else {
+                            commande.put(key, medicamentPrescris);
+                        }
                         break;
                     }
                 }
                 else {
                     writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
-                    commande.add(medicamentPrescris);
+                    String key = medicamentPrescris.getNom();
+                    if (commande.containsKey(key)){
+                        // Changement du nombre de medicament donné à commander
+                        Medicament medicamentCommande = commande.get(key);
+                        medicamentCommande.setQuantite(medicamentCommande.getQuantite() + medicamentPrescris.getQuantite());
+                        commande.put(key, medicamentCommande);
+                    }
+                    else {
+                        commande.put(key, medicamentPrescris);
+                    }
                     break;
                 }
-            }
-            else {
-                writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
-                commande.add(medicamentPrescris);
-                break;
             }
         }
     }
