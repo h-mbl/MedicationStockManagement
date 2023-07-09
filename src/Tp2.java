@@ -12,8 +12,14 @@ public class Tp2 {
             System.out.println("Fournissez les noms des fichiers d'entrée et de sortie.");
             return;
         }
-        String inputFile = "testCode/" + args[0];
+        String inputFile = "tests/" + args[0];
         String outputFile = "testCode/" + args[1];
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            writer.write("");
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         try (FileReader fileReader = new FileReader(inputFile);
              BufferedReader bufferedReader = new BufferedReader(fileReader)){
             String line;
@@ -50,9 +56,6 @@ public class Tp2 {
                         List<Medicament> approvListr = new ArrayList<>();
                         approvListr = readApprov(bufferedReader, line) ;
                         for (Medicament medicament:approvListr) {
-                            String nomMedicament = medicament.getNom();
-                            int quantite= medicament.getQuantiteCommande();
-                            Date dateExpiration= medicament.getDateExpiration();
                             stock.add(medicament);
                         }
                         try (BufferedWriter writerApprov = new BufferedWriter(new FileWriter(outputFile, true))) {
@@ -187,6 +190,8 @@ public class Tp2 {
     }
     public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeMap<String,Medicament> commande, BufferedWriter writer) throws IOException {
         Medicament medicamentPrescris = new Medicament(nomMedicament, (doseTraitement*repetition));
+        //System.out.println(stock.size());
+        //System.out.println(medicamentPrescris.getNom());
         if (stock.isEmpty()){
             writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
             String key = medicamentPrescris.getNom();
@@ -201,15 +206,18 @@ public class Tp2 {
             }
         }
         for (Medicament medicament : stock) {
+            //System.out.println(medicament.getNom());
             if (medicament.getNom().equals(nomMedicament)) {
+
                 medicamentPrescris = medicament;
+                //System.out.println(medicamentPrescris.getNom());
+                //System.out.println("date courante: " + dateCourante);
+                //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
                 if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
-                    System.out.println(medicamentPrescris.getNom() + " " + medicamentPrescris.getQuantite());
-                    System.out.println(medicamentPrescris.getNom() + " " +  medicamentPrescris.getQuantiteCommande());
+
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
                         medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
-                        System.out.println(medicamentPrescris.getQuantite());
                         break;
                     }
                     else {
