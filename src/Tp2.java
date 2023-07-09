@@ -51,7 +51,7 @@ public class Tp2 {
                     case "PRESCRIPTION":
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
                             compteurPrescription += 1;
-                            writer.write("PRESCRIPTION" + compteurPrescription + "\n");
+                            writer.write("PRESCRIPTION " + compteurPrescription + "\n");
                             List<Prescription> prescriptionList = new ArrayList<>();
                             prescriptionList = readPrescription(bufferedReader, line);
                             for (Prescription prescription : prescriptionList) {
@@ -221,6 +221,7 @@ public class Tp2 {
                 if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
+                        medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
                         break;
                     }
                     else {
