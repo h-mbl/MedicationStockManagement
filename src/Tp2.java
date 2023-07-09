@@ -253,6 +253,7 @@ public class Tp2 {
                     System.out.println("prescris" + medicamentPrescris.getQuantiteCommande());
                     medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                     commande.put(key, medicamentCommande);
+                    //commit try
                 }
                 else {
                     commande.put(key, medicamentPrescris);
