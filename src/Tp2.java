@@ -51,7 +51,6 @@ public class Tp2 {
                     case "PRESCRIPTION":
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
                             compteurPrescription += 1;
-                            System.out.println("prescription line");
                             writer.write("PRESCRIPTION" + compteurPrescription + "\n");
                             List<Prescription> prescriptionList = new ArrayList<>();
                             prescriptionList = readPrescription(bufferedReader, line);
@@ -60,8 +59,8 @@ public class Tp2 {
                                 int doseTraitement = prescription.getDoseTraitement();
                                 int repetition = prescription.getRepetition();
                                 prescription(nomMedicament, doseTraitement, repetition, stock, arbreCommande, writer);
-                                System.out.println("appel de la fonction prescription");
                             }
+                            writer.write("\n");
                         }
                         catch (IOException e) {
                             throw new RuntimeException(e);
@@ -107,6 +106,7 @@ public class Tp2 {
                                     writerStock.newLine();
                                 }
                             }
+                            writerStock.write("\n");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -211,23 +211,17 @@ public class Tp2 {
     }
     public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeSet<Medicament> commande, BufferedWriter writer) throws IOException {
         Medicament medicamentPrescris = new Medicament(nomMedicament, (doseTraitement*repetition));
-            if (stock.isEmpty()){
-                writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
-                commande.add(medicamentPrescris);
-            }
-            for (Medicament medicament : stock) {
-                if (medicament.getNom().equals(nomMedicament)) {
-                    medicamentPrescris = medicament;
-                    if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
-                        if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
-                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
-                            break;
-                        }
-                        else {
-                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
-                            commande.add(medicamentPrescris);
-                            break;
-                        }
+        if (stock.isEmpty()){
+            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
+            commande.add(medicamentPrescris);
+        }
+        for (Medicament medicament : stock) {
+            if (medicament.getNom().equals(nomMedicament)) {
+                medicamentPrescris = medicament;
+                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
+                    if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
+                        writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
+                        break;
                     }
                     else {
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
@@ -241,8 +235,14 @@ public class Tp2 {
                     break;
                 }
             }
+            else {
+                writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " COMMANDE\n");
+                commande.add(medicamentPrescris);
+                break;
+            }
         }
-
-        //return new Prescription();
     }
+
+    //return new Prescription();
+}
 
