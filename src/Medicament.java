@@ -10,8 +10,7 @@ public class Medicament implements Comparable<Medicament> {
 
     public Medicament() {
     }
-
-    //public Medicament(String nom, int quantite, Date dateExpiration, Date dateCourante, int quantiteCommande) {
+    public Medicament(String nom, int quantite, Date dateExpiration, Date dateCourante, int quantiteCommande) {}
     public Medicament(String nom, int quantite, Date dateExpiration) {
         this.nom = nom;
         this.quantite = quantite;
