@@ -121,7 +121,7 @@ public class Tp2 {
         List<Medicament> approvList = new ArrayList<>();
         while (!(line = bufferedReader.readLine()).equals(";")) {
             line = line.replace("-", " ");
-            String[] approvLine = line.split(" ");
+            String[] approvLine = line.split("\\s+");
             Date dateExpiration= new Date( Integer.parseInt(approvLine[2]), Integer.parseInt(approvLine[3]),Integer.parseInt(approvLine[4]));
             approvList.add(new Medicament(approvLine[0], Integer.parseInt(approvLine[1]),dateExpiration));
         }

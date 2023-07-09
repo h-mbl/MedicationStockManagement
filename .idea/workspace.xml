@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="accept">
-      <change beforePath="$PROJECT_DIR$/src/Stock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tp2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tp2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCode/ex1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCode/ex1Out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1Out.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/exemple2+.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/exemple2+.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +47,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.comparateur">
     <configuration name="Tp2" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tp2" />
       <module name="MedicationStockManagement" />
@@ -52,6 +56,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="comparateur" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="CompareFiles" />
+      <module name="MedicationStockManagement" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Tp2" />
+      <item itemvalue="Application.comparateur" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
