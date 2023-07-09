@@ -1,21 +1,23 @@
 import java.util.TreeSet;
 
-public class Prescription extends Medicament{
+public class Prescription {
     private String nomMedicament;
     private int doseTraitement;
     private int repetition;
     private TreeSet<Medicament> commande;
 
-    public Prescription(){
+  //  public Prescription(){
+   // }
+
+  public Prescription(String nomMedicament, int doseTraitement, int repetition) {
+      this.nomMedicament = nomMedicament;
+      this.doseTraitement = doseTraitement;
+      this.repetition = repetition;
     }
 
-    public Prescription(String nomMedicament, int doseTraitement, int repetition) {
-        this.nomMedicament = nomMedicament;
-        this.doseTraitement = doseTraitement;
-        this.repetition = repetition;
+   public Prescription(String nom, int quantite, Date dateExpiration) {
     }
-
-    public Prescription(String nom, Date date, String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> commande) {
+   public Prescription(String nom, Date date, String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> commande) {
         this.nomMedicament = nomMedicament;
         this.doseTraitement = doseTraitement;
         this.repetition = repetition;
