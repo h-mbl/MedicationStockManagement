@@ -1,8 +1,11 @@
 import java.io.*;
 //import java.lang.foreign.ValueLayout;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+
+import java.util.*;
 
 
 
@@ -26,6 +29,8 @@ public class Tp2 {
     private static TreeSet<Medicament> arbreCommande = new TreeSet<>();
     private static TreeSet<Medicament> stock = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
+
+
     // public static String[] parties;
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -53,12 +58,35 @@ public class Tp2 {
                             String nomMedicament = prescription.getNomMedicament();
                             int doseTraitement = prescription.getDoseTraitement();
                             int repetition = prescription.getRepetition();
+                            System.out.println( prescription.getNomMedicament());
                             prescription(nomMedicament, doseTraitement, repetition, stock, arbreCommande, outputFile);
                         }
                         //System.out.println("Prescription commande");
                         break;
                     case "APPROV":
-                        //System.out.println("Approv commande");
+                        List<Medicament> approvListr = new ArrayList<>();
+                        approvListr = readApprov(bufferedReader, line) ;
+                       // System.out.println(approvListr);
+                        for (Medicament medicament:approvListr) {
+                            System.out.println("je suis ici 1");
+                            System.out.println(medicament);
+                            String nomMedicament = medicament.getNom();
+                            int quantite= medicament.getQuantiteCommande();
+                            Date dateExpiration= medicament.getDateExpiration();
+                            //ajoute à l'arbre
+                            //approv(nomMedicament,quantite,dateExpiration, stock);
+                            stock.add(medicament);
+                        }
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
+
+                            writer.write("APPROV OK");
+                            writer.newLine();
+                          //  System.out.println("------");
+                           // System.out.println(stock);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
                         break;
                     case "STOCK":
                         //System.out.println("Stock commande");
@@ -72,9 +100,6 @@ public class Tp2 {
             throw new RuntimeException(e);
         }
     }
-
-
-
     //fonction pour lire la date
     public static String readDate (String line) {
         line = line.replace("-", " ");
@@ -96,6 +121,23 @@ public class Tp2 {
     }
     public static boolean datePasse(Date dateAVerifie, Date dateCourante) {
         if (dateAVerifie.getYear() < dateCourante.getYear()) {
+        }
+        return false;
+    }
+    public static List<Medicament> readApprov (BufferedReader bufferedReader, String line) throws IOException {
+        List<Medicament> approvList = new ArrayList<>();
+        while ((line = bufferedReader.readLine()).equals(";")) {
+            String[] approvLine = line.split(" ");
+            Date dateExpiration= new Date( Integer.parseInt(approvLine[2]), Integer.parseInt(approvLine[3]),Integer.parseInt(approvLine[4]));
+            System.out.println("je suis ici 2");
+            System.out.println(approvLine);
+            approvList.add(new Medicament(approvLine[0], Integer.parseInt(approvLine[1]),dateExpiration));
+
+        }
+        return approvList;
+    }
+    public static boolean datePassee(Date dateAVerifie, Date dateCourante ){
+        if (dateAVerifie.getYear() < dateCourante.getYear()){
             return true;
         } else if (dateAVerifie.getYear() == dateCourante.getYear() && dateAVerifie.getMonth() < dateCourante.getMonth()) {
             return true;
@@ -183,11 +225,23 @@ public class Tp2 {
                     break;
                 }
             }
+
+            if (medicamentPrescris.getQuantite() < doseTraitement * repetition) {
+
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         //return new Prescription();
+    }
+    public static TreeSet approv(String nomMedicament, int quantite, Date dateExpiration, TreeSet<Medicament> stock){
+        Medicament medicamentPrescris = new Medicament();
+
+
+        //return new Prescription();
+        return stock;
     }
 
 }
