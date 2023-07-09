@@ -1,5 +1,4 @@
 import java.io.*;
-//import java.lang.foreign.ValueLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,29 +7,13 @@ import java.util.TreeSet;
 
 
 public class Tp2 {
-    /*
-    private static String nomMedicament;
-    private static int quantite;
-    private static int aaaa;
-    private static int mm;
-    private static int jj;
-    private static int doseTraitement;
-    private static int repetition;
 
-     */
-    //cette liste enregistrera l'ordre des actions à effectuer
-    /*
-    private static Queue<Object> fileOperation= new LinkedList<>();
-    private static Map<String, Medicament> treeMap = new TreeMap<>();
-    private static TreeSet<Medicament> treeSet = new TreeSet<>();
-     */
     private static TreeSet<Medicament> arbreCommande = new TreeSet<>();
     private static TreeSet<Medicament> stock = new TreeSet<>();
     public static  Date dateCourante = new Date(2000,01,01);
-    // public static String[] parties;
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("provide input or output file names.");
+            System.out.println("Fournissez les noms des fichiers d'entrée et de sortie.");
             return;
         }
         String inputFile = "testCode/" + args[0];
@@ -70,7 +53,6 @@ public class Tp2 {
                     case "APPROV":
                         List<Medicament> approvListr = new ArrayList<>();
                         approvListr = readApprov(bufferedReader, line) ;
-                        // System.out.println(approvListr);
                         for (Medicament medicament:approvListr) {
                             String nomMedicament = medicament.getNom();
                             int quantite= medicament.getQuantiteCommande();
@@ -87,22 +69,22 @@ public class Tp2 {
                         break;
                     case "STOCK":
                         try (BufferedWriter writerStock = new BufferedWriter(new FileWriter(outputFile, true))) {
-
-                            writerStock.write("STOCK" +" "+dateCourante.getYear()+"-"+dateCourante.getMonth()+"-"+
-                                    dateCourante.getDay());
+                            //String.format("%02d", number) spécifie que le nombre doit être formaté comme un nombre (%d)
+                            //  de 2 caractères (2), et qu'un zéro sera ajouté devant le nombre si le nombre <10.
+                            writerStock.write("STOCK" +" "+dateCourante.getYear()+"-"+String.format("%02d", dateCourante.getMonth())+"-"+
+                                    String.format("%02d", dateCourante.getDay()));
                             writerStock.newLine();
                             Iterator<Medicament> iterator = stock.iterator();
                             while (iterator.hasNext()) {
                                 Medicament medicament = iterator.next();
-                                // Vérifier si la date de l'élément est inférieure à la date courante
                                 if (medicament.getDateExpiration().getYear()< dateCourante.getYear() &&
                                         medicament.getDateExpiration().getMonth()< dateCourante.getMonth() &&
                                         medicament.getDateExpiration().getDay()< dateCourante.getDay() ) {
                                     iterator.remove();
                                 } else {
                                     writerStock.write(medicament.getNom() + " " + medicament.getQuantite() + " " +
-                                            medicament.getDateExpiration().getYear() + "-" + medicament.getDateExpiration().getMonth() + "-" +
-                                            medicament.getDateExpiration().getDay());
+                                            medicament.getDateExpiration().getYear() + "-" + String.format("%02d",medicament.getDateExpiration().getMonth()) + "-" +
+                                            String.format("%02d",medicament.getDateExpiration().getDay()));
                                     writerStock.newLine();
                                 }
                             }
@@ -121,9 +103,6 @@ public class Tp2 {
         }
     }
 
-
-
-    //fonction pour lire la date
     public static String readDate (String line) {
         line = line.replace("-", " ");
         line = line.replace("DATE", "");
@@ -132,7 +111,7 @@ public class Tp2 {
         // String[] parties = line.split(" ");
         return line;
     }
-    //fonction pour lire la prescription
+
     public static List<Prescription> readPrescription (BufferedReader bufferedReader, String line) throws IOException {
         List<Prescription> prescriptionsList = new ArrayList<>();
         while (!(line = bufferedReader.readLine()).equals(";")) {
@@ -188,7 +167,7 @@ public class Tp2 {
         else {return false;}
     }
     public static String writeDate(Date date){
-        return (date.getYear() + "-" + date.getMonth() + "-" + date.getDay());
+        return (date.getYear() + "-" +  String.format("%02d", date.getMonth()) + "-" + String.format("%02d", date.getDay()));
     }
 
     public static Date date(Date date, TreeSet<Medicament> commande, String file){
@@ -243,7 +222,5 @@ public class Tp2 {
             }
         }
     }
-
-    //return new Prescription();
 }
 
