@@ -33,6 +33,7 @@ public class Date implements Comparable<Date> {
         this.day = day;
     }
 
+
     @Override
     public int compareTo(Date other) {
         int yearComparison = Integer.compare(year, other.getYear());
@@ -46,5 +47,8 @@ public class Date implements Comparable<Date> {
         }
 
         return Integer.compare(day, other.getDay());
+    }
+    public String toString() {
+        return String.format("%04d-%02d-%02d", year, month, day);
     }
 }
