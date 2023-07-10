@@ -212,7 +212,9 @@ public class Tp2 {
                 //System.out.println(medicamentPrescris.getNom());
                 //System.out.println("date courante: " + dateCourante);
                 //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
-                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
+                int days = doseTraitement * repetition;
+                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)&& calculerJour(days,medicamentPrescris.getDateExpiration().getDay(),
+                        medicamentPrescris.getDateExpiration().getMonth(),medicamentPrescris.getDateExpiration().getYear()).compareTo(medicamentPrescris.getDateExpiration())>0){
 
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
