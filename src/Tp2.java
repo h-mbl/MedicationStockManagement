@@ -226,6 +226,7 @@ public class Tp2 {
                             String key = medicamentPrescris.getNom();
                             if (commande.containsKey(key)) {
                                 // Changement du nombre de medicament donné à commander
+                                //yo
                                 Medicament medicamentCommande = commande.get(key);
                                 medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                                 commande.put(key, medicamentCommande);
