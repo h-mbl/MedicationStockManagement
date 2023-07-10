@@ -208,6 +208,7 @@ public class Tp2 {
             } else {
                 commande.put(key, medicamentPrescris);
             }
+            return;
         }
         for (Medicament medicament : stock) {
             System.out.println(nomMedicament);

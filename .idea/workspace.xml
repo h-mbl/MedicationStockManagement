@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="Débuggage final de prescription">
+    <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="stock datePasse">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tp2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tp2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testCode/ex1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testCode/ex1Out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1Out.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +51,7 @@
     <configuration name="Tp2" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tp2" />
       <module name="MedicationStockManagement" />
-      <option name="PROGRAM_PARAMETERS" value="exemple6.txt ex1Out.txt" />
+      <option name="PROGRAM_PARAMETERS" value="exemple7.txt ex1Out.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -71,7 +70,7 @@
       <workItem from="1688769020044" duration="84000" />
       <workItem from="1688772906671" duration="7000" />
       <workItem from="1688772933896" duration="1324000" />
-      <workItem from="1689030453246" duration="1409000" />
+      <workItem from="1689030453246" duration="1801000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1687035988104</created>
@@ -122,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689029835458</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="stock datePasse">
+      <created>1689032036461</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689032036461</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +141,7 @@
     <MESSAGE value="accept" />
     <MESSAGE value="precription probleme de contains" />
     <MESSAGE value="Débuggage final de prescription" />
-    <option name="LAST_COMMIT_MESSAGE" value="Débuggage final de prescription" />
+    <MESSAGE value="stock datePasse" />
+    <option name="LAST_COMMIT_MESSAGE" value="stock datePasse" />
   </component>
 </project>
