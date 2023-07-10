@@ -211,69 +211,67 @@ public class Tp2 {
                 commande.put(key, medicamentPrescris);
             }
         }
-        if (stock.contains(medicamentPrescris)) {
-            for (Medicament medicament : stock) {
-                if (medicament.getNom().equals(nomMedicament)) {
-                    medicamentPrescris = medicament;
-                    if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)) {
+        for (Medicament medicament : stock) {
+            System.out.println(nomMedicament);
+            System.out.println(medicament.getNom());
+            System.out.println(medicament.getQuantite());
+            if (medicament.getNom().equals(nomMedicament)) {
+                medicamentPrescris = medicament;
+                System.out.println("medicament trouvé " + nomMedicament + " OK");
+                //System.out.println(medicamentPrescris.getNom());
+                //System.out.println("date courante: " + dateCourante);
+                //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
+                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
 
-                        if (medicamentPrescris.getQuantite() >= doseTraitement * repetition) {
-                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  OK\n");
-                            medicament.setQuantite(medicament.getQuantite() - doseTraitement * repetition);
-                            break;
-                        } else {
-                            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  COMMANDE\n");
-                            String key = medicamentPrescris.getNom();
-                            if (commande.containsKey(key)) {
-                                // Changement du nombre de medicament donné à commander
-                                //yo
-                                Medicament medicamentCommande = commande.get(key);
-                                medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
-                                commande.put(key, medicamentCommande);
-                            } else {
-                                commande.put(key, medicamentPrescris);
-                            }
-                            break;
-                        }
-                    } else {
+                    if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
+                        writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  OK\n");
+                        medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
+                        return;
+                    }
+                    else {
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  COMMANDE\n");
                         String key = medicamentPrescris.getNom();
-                        if (commande.containsKey(key)) {
+                        if (commande.containsKey(key)){
                             // Changement du nombre de medicament donné à commander
                             Medicament medicamentCommande = commande.get(key);
                             medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                             commande.put(key, medicamentCommande);
-                        } else {
+                        }
+                        else {
                             commande.put(key, medicamentPrescris);
                         }
-                        break;
+                        return;
                     }
-                } else {
+                }
+                else {
                     writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  COMMANDE\n");
                     String key = medicamentPrescris.getNom();
-                    if (commande.containsKey(key)) {
-                        // Changement du nombre de medicament donné à commandé
+                    if (commande.containsKey(key)){
+                        // Changement du nombre de medicament donné à commander
                         Medicament medicamentCommande = commande.get(key);
                         medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
                         commande.put(key, medicamentCommande);
-                    } else {
+                    }
+                    else {
                         commande.put(key, medicamentPrescris);
                     }
-                    break;
+                    return;
                 }
             }
-        } else {
-            writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  COMMANDE\n");
-            String key = medicamentPrescris.getNom();
-            if (commande.containsKey(key)) {
-                // Changement du nombre de medicament donné à commandé
-                Medicament medicamentCommande = commande.get(key);
-                medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
-                commande.put(key, medicamentCommande);
-            } else {
-                commande.put(key, medicamentPrescris);
-            }
+        }
+        writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  COMMANDE\n");
+        String key = medicamentPrescris.getNom();
+        if (commande.containsKey(key)){
+            // Changement du nombre de medicament donné à commander
+            Medicament medicamentCommande = commande.get(key);
+            medicamentCommande.setQuantiteCommande(medicamentCommande.getQuantiteCommande() + medicamentPrescris.getQuantiteCommande());
+            commande.put(key, medicamentCommande);
+        }
+        else {
+            commande.put(key, medicamentPrescris);
         }
     }
 }
+
+
 
