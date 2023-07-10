@@ -12,7 +12,7 @@ public class Tp2 {
             System.out.println("Fournissez les noms des fichiers d'entrée et de sortie.");
             return;
         }
-        String inputFile = "tests/" + args[0];
+        String inputFile = "testCode/" + args[0];
         String outputFile = "testCode/" + args[1];
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write("");
@@ -210,17 +210,10 @@ public class Tp2 {
             if (medicament.getNom().equals(nomMedicament)) {
 
                 medicamentPrescris = medicament;
-<<<<<<< HEAD
                 int days = doseTraitement * repetition;
                 if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante) && calculerJour(days,medicamentPrescris.getDateExpiration().getDay(),
                         medicamentPrescris.getDateExpiration().getMonth(),medicamentPrescris.getDateExpiration().getYear()).compareTo(medicamentPrescris.getDateExpiration())>0){
-=======
-                //System.out.println(medicamentPrescris.getNom());
-                //System.out.println("date courante: " + dateCourante);
-                //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
                 if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
-
->>>>>>> 5cdccdb344d7eeb4781fc4a66f3cdbf0e88d82e0
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
                         medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
@@ -272,5 +265,6 @@ public class Tp2 {
             }
         }
     }
+}
 }
 

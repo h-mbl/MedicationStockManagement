@@ -7,10 +7,6 @@
     <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="accept">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tp2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tp2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testCode/ex1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testCode/ex1Out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1Out.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/exemple1+.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/exemple1+.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/null" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +51,7 @@
     <configuration name="Tp2" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tp2" />
       <module name="MedicationStockManagement" />
-      <option name="PROGRAM_PARAMETERS" value="ex1.txt null.txt" />
+      <option name="PROGRAM_PARAMETERS" value="ex1.txt ex1Out.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
