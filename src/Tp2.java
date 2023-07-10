@@ -203,13 +203,12 @@ public class Tp2 {
         for (Medicament medicament : stock) {
             if (medicament.getNom().equals(nomMedicament)) {
                 medicamentPrescris = medicament;
-                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
-                    System.out.println(medicamentPrescris.getNom() + " " + medicamentPrescris.getQuantite());
-                    System.out.println(medicamentPrescris.getNom() + " " +  medicamentPrescris.getQuantiteCommande());
+                int days = doseTraitement * repetition;
+                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante) && calculerJour(days,medicamentPrescris.getDateExpiration().getDay(),
+                        medicamentPrescris.getDateExpiration().getMonth(),medicamentPrescris.getDateExpiration().getYear()).compareTo(medicamentPrescris.getDateExpiration())>0){
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + " OK\n");
                         medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
-                        System.out.println(medicamentPrescris.getQuantite());
                         break;
                     }
                     else {
