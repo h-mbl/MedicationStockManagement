@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="precription probleme de contains">
+    <list default="true" id="b836a68c-5c2d-4b8e-8bfe-a3097df59d0e" name="Changes" comment="Débuggage final de prescription">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tp2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tp2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCode/ex1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testCode/ex1Out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCode/ex1Out.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +71,7 @@
       <workItem from="1688769020044" duration="84000" />
       <workItem from="1688772906671" duration="7000" />
       <workItem from="1688772933896" duration="1324000" />
+      <workItem from="1689030453246" duration="1409000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1687035988104</created>
@@ -113,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689028376654</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Débuggage final de prescription">
+      <created>1689029835458</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689029835458</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +134,7 @@
     <MESSAGE value="date passe boolean" />
     <MESSAGE value="accept" />
     <MESSAGE value="precription probleme de contains" />
-    <option name="LAST_COMMIT_MESSAGE" value="precription probleme de contains" />
+    <MESSAGE value="Débuggage final de prescription" />
+    <option name="LAST_COMMIT_MESSAGE" value="Débuggage final de prescription" />
   </component>
 </project>

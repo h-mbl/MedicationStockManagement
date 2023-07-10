@@ -75,9 +75,7 @@ public class Tp2 {
                             Iterator<Medicament> iterator = stock.iterator();
                             while (iterator.hasNext()) {
                                 Medicament medicament = iterator.next();
-                                if (medicament.getDateExpiration().getYear() < dateCourante.getYear() &&
-                                        medicament.getDateExpiration().getMonth() < dateCourante.getMonth() &&
-                                        medicament.getDateExpiration().getDay() < dateCourante.getDay()) {
+                                if (datePasse(medicament.getDateExpiration(), dateCourante)) {
                                     iterator.remove();
                                 } else {
                                     writerStock.write(medicament.getNom() + " " + medicament.getQuantite() + " " +
@@ -217,7 +215,6 @@ public class Tp2 {
             System.out.println(medicament.getQuantite());
             if (medicament.getNom().equals(nomMedicament)) {
                 medicamentPrescris = medicament;
-                System.out.println("medicament trouvé " + nomMedicament + " OK");
                 //System.out.println(medicamentPrescris.getNom());
                 //System.out.println("date courante: " + dateCourante);
                 //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
@@ -272,6 +269,12 @@ public class Tp2 {
         }
     }
 }
+
+//a = 2
+// b= a
+// b = b-1
+// b = 1
+// a= 1
 
 
 
