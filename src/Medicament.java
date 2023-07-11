@@ -93,5 +93,15 @@ public class Medicament implements Comparable<Medicament> {
 
         return Integer.compare(getQuantiteCommande(), other.getQuantiteCommande());
     }
+    @Override
+    public String toString() {
+        return "Medicament{" +
+                "nom='" + nom + '\'' +
+                ", quantite=" + quantite +
+                ", dateExpiration=" + dateExpiration +
+                ", dateCourante=" + dateCourante +
+                ", quantiteCommande=" + quantiteCommande +
+                '}';
+    }
 
 }

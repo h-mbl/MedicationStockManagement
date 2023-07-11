@@ -146,7 +146,7 @@ public class Tp2 {
         int month = date.getMonth();
         int year = date.getYear();
         while (newDay > nbrJrMm(month, year)) {
-            newDay -= month;
+            newDay -= nbrJrMm(month, year);
             if (month == 12) {
                 month = 1;
                 year += 1;

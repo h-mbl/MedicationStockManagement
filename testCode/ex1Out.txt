@@ -17,7 +17,7 @@ Medicament9 59 2018-08-07
 PRESCRIPTION 1
 Medicament10 5 6  OK
 Medicament9 10 1  OK
-Medicament49 5 1  COMMANDE
+Medicament49 5 1  OK
 
 PRESCRIPTION 2
 Medicament10 14 2  OK
@@ -42,7 +42,7 @@ Medicament20 48 2016-11-17
 Medicament34 51 2017-09-04
 Medicament38 21 2015-05-15
 Medicament48 12 2014-06-03
-Medicament49 88 2013-09-01
+Medicament49 83 2013-09-01
 Medicament9 45 2018-08-07
 
 APPROV OK
@@ -60,7 +60,7 @@ Medicament34 51 2017-09-04
 Medicament38 21 2015-05-15
 Medicament44 19 2015-07-01
 Medicament48 12 2014-06-03
-Medicament49 88 2013-09-01
+Medicament49 83 2013-09-01
 Medicament5 9 2013-11-16
 Medicament9 45 2018-08-07
 Medicament9 56 2013-11-17
@@ -81,13 +81,12 @@ Medicament38 21 2015-05-15
 Medicament4 8 2017-10-30
 Medicament44 19 2015-07-01
 Medicament48 12 2014-06-03
-Medicament49 88 2013-09-01
+Medicament49 83 2013-09-01
 Medicament5 9 2013-11-16
 Medicament9 45 2018-08-07
 Medicament9 56 2013-11-17
 
-2018-01-01 COMMANDES :
-Medicament49 0
+2018-01-01 OK
 
 PRESCRIPTION 5
 Medicament23 6 10  COMMANDE
