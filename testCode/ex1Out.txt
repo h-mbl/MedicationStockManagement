@@ -52,9 +52,9 @@ Medicament25 12 12  COMMANDE
 
 PRESCRIPTION 8
 Medicament20 26 7  COMMANDE
-Medicament26 5 8  OK
+Medicament26 5 8  COMMANDE
 Medicament17 23 9  COMMANDE
-Medicament4 13 3  OK
+Medicament4 13 3  COMMANDE
 Medicament34 3 6  COMMANDE
 
 PRESCRIPTION 9
@@ -67,15 +67,15 @@ Medicament16 15 2  COMMANDE
 PRESCRIPTION 11
 Medicament7 24 1  COMMANDE
 Medicament2 21 9  COMMANDE
-Medicament27 1 5  OK
-Medicament12 21 4  OK
+Medicament27 1 5  COMMANDE
+Medicament12 21 4  COMMANDE
 
 PRESCRIPTION 12
 Medicament43 13 1  COMMANDE
 Medicament49 17 9  COMMANDE
 
 PRESCRIPTION 13
-Medicament22 5 6  OK
+Medicament22 5 6  COMMANDE
 Medicament16 25 9  COMMANDE
 Medicament44 10 2  COMMANDE
 Medicament47 24 7  COMMANDE
@@ -96,8 +96,8 @@ Medicament43 21 10  COMMANDE
 Medicament4 12 12  COMMANDE
 
 PRESCRIPTION 17
-Medicament18 3 5  OK
-Medicament12 2 3  OK
+Medicament18 3 5  COMMANDE
+Medicament12 2 3  COMMANDE
 Medicament43 15 12  COMMANDE
 Medicament24 14 8  COMMANDE
 Medicament44 16 5  COMMANDE
@@ -110,20 +110,20 @@ APPROV OK
 STOCK 2009-03-04
 Medicament1 33 2011-09-01
 Medicament11 95 2012-04-01
-Medicament12 27 2010-06-01
+Medicament12 117 2010-06-01
 Medicament14 110 2018-03-01
 Medicament15 57 2010-06-01
 Medicament17 54 2016-10-01
 Medicament18 106 2010-04-01
-Medicament18 60 2015-04-01
+Medicament18 75 2015-04-01
 Medicament19 75 2011-09-01
 Medicament2 35 2014-03-01
 Medicament20 69 2019-10-01
-Medicament22 40 2009-03-07
+Medicament22 70 2009-03-07
 Medicament22 59 2012-04-01
 Medicament26 112 2012-02-01
-Medicament26 48 2014-04-01
-Medicament27 49 2014-09-01
+Medicament26 88 2014-04-01
+Medicament27 54 2014-09-01
 Medicament27 98 2016-09-01
 Medicament28 72 2014-03-01
 Medicament3 79 2011-08-01
@@ -134,7 +134,7 @@ Medicament32 100 2017-02-01
 Medicament33 56 2019-08-01
 Medicament35 116 2014-02-01
 Medicament39 42 2014-06-01
-Medicament4 64 2011-05-01
+Medicament4 103 2011-05-01
 Medicament41 67 2009-08-01
 Medicament41 20 2015-10-01
 Medicament42 47 2017-01-01
@@ -150,25 +150,25 @@ APPROV OK
 STOCK 2009-03-04
 Medicament1 33 2011-09-01
 Medicament11 95 2012-04-01
-Medicament12 27 2010-06-01
+Medicament12 117 2010-06-01
 Medicament14 110 2018-03-01
 Medicament15 57 2010-06-01
 Medicament17 54 2016-10-01
 Medicament18 106 2010-04-01
-Medicament18 60 2015-04-01
+Medicament18 75 2015-04-01
 Medicament19 75 2011-09-01
 Medicament2 35 2014-03-01
 Medicament20 69 2019-10-01
 Medicament21 88 2018-03-01
-Medicament22 40 2009-03-07
+Medicament22 70 2009-03-07
 Medicament22 59 2012-04-01
 Medicament22 94 2019-07-01
 Medicament24 122 2014-03-01
 Medicament25 51 2019-11-01
 Medicament26 112 2012-02-01
-Medicament26 48 2014-04-01
+Medicament26 88 2014-04-01
 Medicament26 15 2018-08-01
-Medicament27 49 2014-09-01
+Medicament27 54 2014-09-01
 Medicament27 98 2016-09-01
 Medicament27 106 2019-05-01
 Medicament28 72 2014-03-01
@@ -184,7 +184,7 @@ Medicament34 100 2014-04-01
 Medicament35 116 2014-02-01
 Medicament39 42 2014-06-01
 Medicament39 41 2018-03-01
-Medicament4 64 2011-05-01
+Medicament4 103 2011-05-01
 Medicament4 5 2012-08-01
 Medicament41 67 2009-08-01
 Medicament41 20 2015-10-01
@@ -205,15 +205,19 @@ Medicament9 32 2017-07-01
 
 2000-05-17 COMMANDES :
 Medicament10 43
+Medicament12 0
 Medicament14 0
 Medicament16 489
 Medicament17 0
+Medicament18 0
 Medicament19 8
 Medicament2 189
 Medicament20 182
 Medicament21 270
+Medicament22 0
 Medicament24 112
 Medicament25 248
+Medicament26 0
 Medicament27 180
 Medicament34 18
 Medicament35 156
@@ -234,25 +238,25 @@ Medicament9 144
 STOCK 2000-05-17
 Medicament1 33 2011-09-01
 Medicament11 95 2012-04-01
-Medicament12 27 2010-06-01
+Medicament12 117 2010-06-01
 Medicament14 110 2018-03-01
 Medicament15 57 2010-06-01
 Medicament17 54 2016-10-01
 Medicament18 106 2010-04-01
-Medicament18 60 2015-04-01
+Medicament18 75 2015-04-01
 Medicament19 75 2011-09-01
 Medicament2 35 2014-03-01
 Medicament20 69 2019-10-01
 Medicament21 88 2018-03-01
-Medicament22 40 2009-03-07
+Medicament22 70 2009-03-07
 Medicament22 59 2012-04-01
 Medicament22 94 2019-07-01
 Medicament24 122 2014-03-01
 Medicament25 51 2019-11-01
 Medicament26 112 2012-02-01
-Medicament26 48 2014-04-01
+Medicament26 88 2014-04-01
 Medicament26 15 2018-08-01
-Medicament27 49 2014-09-01
+Medicament27 54 2014-09-01
 Medicament27 98 2016-09-01
 Medicament27 106 2019-05-01
 Medicament28 72 2014-03-01
@@ -268,7 +272,7 @@ Medicament34 100 2014-04-01
 Medicament35 116 2014-02-01
 Medicament39 42 2014-06-01
 Medicament39 41 2018-03-01
-Medicament4 64 2011-05-01
+Medicament4 103 2011-05-01
 Medicament4 5 2012-08-01
 Medicament41 67 2009-08-01
 Medicament41 20 2015-10-01
@@ -290,7 +294,7 @@ Medicament9 32 2017-07-01
 PRESCRIPTION 19
 Medicament36 11 6  COMMANDE
 Medicament42 19 9  COMMANDE
-Medicament32 3 9  OK
+Medicament32 3 9  COMMANDE
 Medicament9 13 10  COMMANDE
 Medicament23 14 1  COMMANDE
 
@@ -308,65 +312,72 @@ Medicament36 30 9  COMMANDE
 
 PRESCRIPTION 22
 Medicament38 25 7  COMMANDE
-Medicament8 9 2  OK
+Medicament8 9 2  COMMANDE
 Medicament13 3 5  COMMANDE
 Medicament25 24 3  COMMANDE
-Medicament3 24 1  OK
+Medicament3 24 1  COMMANDE
 
 PRESCRIPTION 23
-Medicament24 5 12  OK
+Medicament24 5 12  COMMANDE
 Medicament42 25 12  COMMANDE
-Medicament41 4 11  OK
+Medicament41 4 11  COMMANDE
 
 PRESCRIPTION 24
-Medicament24 29 2  OK
+Medicament24 29 2  COMMANDE
 Medicament25 12 5  COMMANDE
-Medicament35 12 4  OK
-Medicament33 11 7  OK
-Medicament49 2 3  OK
+Medicament35 12 4  COMMANDE
+Medicament33 11 7  COMMANDE
+Medicament49 2 3  COMMANDE
 
 PRESCRIPTION 25
-Medicament38 3 7  OK
+Medicament38 3 7  COMMANDE
 Medicament33 4 5  COMMANDE
 
 PRESCRIPTION 26
 Medicament42 23 3  COMMANDE
 
 PRESCRIPTION 27
-Medicament22 7 1  OK
+Medicament22 7 1  COMMANDE
 
 PRESCRIPTION 28
-Medicament2 28 3  OK
+Medicament2 28 3  COMMANDE
 Medicament22 22 8  COMMANDE
 Medicament41 23 8  COMMANDE
 Medicament4 8 12  COMMANDE
 
 PRESCRIPTION 29
-Medicament19 11 3  OK
+Medicament19 11 3  COMMANDE
 Medicament6 22 9  COMMANDE
-Medicament44 12 2  OK
-Medicament20 1 8  OK
+Medicament44 12 2  COMMANDE
+Medicament20 1 8  COMMANDE
 Medicament38 16 8  COMMANDE
 
 PRESCRIPTION 30
 Medicament23 19 5  COMMANDE
-Medicament49 10 6  OK
+Medicament49 10 6  COMMANDE
 Medicament46 21 10  COMMANDE
 
 PRESCRIPTION 31
 Medicament48 16 12  COMMANDE
-Medicament31 5 1  OK
+Medicament31 5 1  COMMANDE
 Medicament12 25 10  COMMANDE
 
 2016-12-26 COMMANDES :
 Medicament11 0
 Medicament12 0
 Medicament13 15
+Medicament19 0
+Medicament2 0
+Medicament20 0
 Medicament22 0
 Medicament23 109
+Medicament24 0
 Medicament25 0
+Medicament3 0
 Medicament31 0
+Medicament32 0
 Medicament33 0
+Medicament35 0
 Medicament36 66
 Medicament38 0
 Medicament4 0
@@ -375,13 +386,15 @@ Medicament42 0
 Medicament44 207
 Medicament46 0
 Medicament48 192
+Medicament49 0
 Medicament6 0
+Medicament8 0
 Medicament9 0
 
 STOCK 2016-12-26
 Medicament1 35 2019-02-01
 Medicament14 110 2018-03-01
-Medicament20 61 2019-10-01
+Medicament20 69 2019-10-01
 Medicament21 88 2018-03-01
 Medicament22 94 2019-07-01
 Medicament25 51 2019-11-01
@@ -389,8 +402,8 @@ Medicament26 15 2018-08-01
 Medicament27 106 2019-05-01
 Medicament28 91 2019-06-01
 Medicament30 47 2019-05-01
-Medicament32 73 2017-02-01
-Medicament33 12 2018-11-01
+Medicament32 100 2017-02-01
+Medicament33 89 2018-11-01
 Medicament33 56 2019-08-01
 Medicament39 41 2018-03-01
 Medicament42 47 2017-01-01

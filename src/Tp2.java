@@ -75,7 +75,7 @@ public class Tp2 {
                             Iterator<Medicament> iterator = stock.iterator();
                             while (iterator.hasNext()) {
                                 Medicament medicament = iterator.next();
-                                if (datePasse(medicament.getDateExpiration(), dateCourante)) {
+                                if (!datePasse(medicament.getDateExpiration(), dateCourante)) {
                                     iterator.remove();
                                 } else {
                                     writerStock.write(medicament.getNom() + " " + medicament.getQuantite() + " " +
@@ -213,9 +213,9 @@ public class Tp2 {
             return;
         }
         for (Medicament medicament : stock) {
-            System.out.println(nomMedicament);
+          /*  System.out.println(nomMedicament);
             System.out.println(medicament.getNom());
-            System.out.println(medicament.getQuantite());
+            System.out.println(medicament.getQuantite());*/
             if (medicament.getNom().equals(nomMedicament)) {
                 medicamentPrescris = medicament;
                 //System.out.println(medicamentPrescris.getNom());
