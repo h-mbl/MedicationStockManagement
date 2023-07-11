@@ -141,10 +141,8 @@ public class Tp2 {
         }
     }
 
-    public static Date calculerJour(int days, Date date) {
-        int newDay = date.getDay() + days;
-        int month = date.getMonth();
-        int year = date.getYear();
+    public static Date calculerJour(int days, int day, int month, int year) {
+        int newDay = day + days;
         while (newDay > nbrJrMm(month, year)) {
             newDay -= month;
             if (month == 12) {
@@ -221,8 +219,8 @@ public class Tp2 {
                 //System.out.println(medicamentPrescris.getNom());
                 //System.out.println("date courante: " + dateCourante);
                 //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
-                Date dateFinTraitement = calculerJour((doseTraitement * repetition), medicamentPrescris.getDateExpiration());
-                if (!datePasse(medicamentPrescris.getDateExpiration(), dateFinTraitement)){
+                if (!datePasse(medicamentPrescris.getDateExpiration(), dateCourante)){
+
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  OK\n");
                         medicament.setQuantite(medicament.getQuantite() - doseTraitement*repetition);
@@ -273,6 +271,11 @@ public class Tp2 {
     }
 }
 
+//a = 2
+// b= a
+// b = b-1
+// b = 1
+// a= 1
 
 
 
