@@ -154,7 +154,7 @@ public class Tp2 {
                 month += 1;
             }
         }
-        return new Date(newDay, month, year);
+        return new Date(year, month, newDay);
     }
 
     public static int nbrJrMm(int month, int year) {
@@ -197,7 +197,8 @@ public class Tp2 {
         return date;
     }
 
-    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock, TreeMap<String, Medicament> commande, BufferedWriter writer, int compteur) throws IOException {
+    public static void prescription(String nomMedicament, int doseTraitement, int repetition, TreeSet<Medicament> stock,
+                                    TreeMap<String, Medicament> commande, BufferedWriter writer, int compteur) throws IOException {
         Medicament medicamentPrescris = new Medicament(nomMedicament, (doseTraitement * repetition));
         if (stock.isEmpty()) {
             writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  COMMANDE\n");
@@ -213,15 +214,9 @@ public class Tp2 {
             return;
         }
         for (Medicament medicament : stock) {
-            System.out.println(nomMedicament);
-            System.out.println(medicament.getNom());
-            System.out.println(medicament.getQuantite());
             if (medicament.getNom().equals(nomMedicament)) {
                 medicamentPrescris = medicament;
-                //System.out.println(medicamentPrescris.getNom());
-                //System.out.println("date courante: " + dateCourante);
-                //System.out.println("date expiration: " + medicamentPrescris.getDateExpiration());
-                Date dateFinTraitement = calculerJour((doseTraitement * repetition), medicamentPrescris.getDateExpiration());
+                Date dateFinTraitement = calculerJour((doseTraitement * repetition), dateCourante);
                 if (!datePasse(medicamentPrescris.getDateExpiration(), dateFinTraitement)){
                     if (medicamentPrescris.getQuantite() >= doseTraitement * repetition){
                         writer.write(nomMedicament + " " + doseTraitement + " " + repetition + "  OK\n");

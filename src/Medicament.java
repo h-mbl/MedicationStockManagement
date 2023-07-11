@@ -79,7 +79,7 @@ public class Medicament implements Comparable<Medicament> {
             return nameComparison;
         }
         if (other.getDateExpiration() != null) {
-            int expirationComparison = getDateExpiration().compareTo(other.getDateExpiration());
+            int expirationComparison = other.getDateExpiration().compareTo(getDateExpiration());
             if (expirationComparison != 0) {
                 return expirationComparison;
             }
